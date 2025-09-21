@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: #fff;
+  }
+  
+  #startBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: black;
+    color: white;
+    font-size: 2rem;
+    padding: 40px 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+  }
+  
