@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.m
 
 let scene, camera, renderer, group, innerSphere;
 let cards = [];
-const CARD_COUNT = 60;
+const CARD_COUNT = 40;
 const radius = 16;
 
 init();
@@ -52,7 +52,7 @@ function init() {
   innerSphere.visible = false;
   scene.add(innerSphere);
 
-  document.getElementById('startBtn').addEventListener('click', runTimeline);
+  runTimeline();   // start animation automatically
   window.addEventListener('resize', onResize);
 }
 
@@ -76,7 +76,10 @@ function runTimeline() {
       z: t.z,
       delay: 1.2,
       duration: 2,
-      ease: "power2.inOut"
+      ease: "power2.inOut",
+      onUpdate: () => {
+        card.lookAt(0, 0, 0);  // make it face the center
+      }
     });
   });
 
@@ -93,12 +96,11 @@ function runTimeline() {
   });
 
   // ---- Stage 4: zoom into inside ----
-  gsap.timeline({ delay: 6 })
+  gsap.timeline({ delay: 3 })
     .to(camera.position, { z: 25, duration: 2, ease: "power2.inOut" })
-    .to(camera.position, { z: 10, duration: 2, ease: "power2.inOut" })
-    .to(camera.position, {
-      z: 0,
-      duration: 3,
+    .to(camera.position, { 
+      z: 10, 
+      duration: 2, 
       ease: "power2.inOut",
       onComplete: () => {
         innerSphere.visible = true;

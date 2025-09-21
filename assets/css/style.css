@@ -10,8 +10,8 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: black;
-    color: white;
+    background: rgb(239, 234, 234);
+    color: rgb(22, 21, 21);
     font-size: 2rem;
     padding: 40px 60px;
     border-radius: 50%;
