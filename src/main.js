@@ -2,6 +2,13 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.m
 
 let scene, camera, renderer, group, innerSphere;
 let cards = [];
+let raycaster = new THREE.Raycaster();
+let mouse = new THREE.Vector2();
+let clickable = false;   // becomes true after timeline finishes
+let targetCameraX = 0;
+let targetCameraY = 0;
+
+
 const CARD_COUNT = 40;
 const radius = 16;
 
@@ -16,6 +23,7 @@ function init() {
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0xffffff);
   renderer.domElement.style.position = 'absolute';
   renderer.domElement.style.top = 0;
   renderer.domElement.style.left = 0;
@@ -26,23 +34,28 @@ function init() {
   scene.add(group);
 
   // Card geometry / material
-  const geom = new THREE.PlaneGeometry(2, 1.2);
+  const geom = new THREE.PlaneGeometry(2.4, 2);
+
 
   // ---- Create cards on a circle (tiny & hidden) ----
   for (let i = 0; i < CARD_COUNT; i++) {
     const angle = (i / CARD_COUNT) * Math.PI * 2;
     const mat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
+      color: 0x000000,        // <-- black cards
       transparent: true,
       opacity: 0,
       side: THREE.DoubleSide
+      
     });
 
     const card = new THREE.Mesh(geom, mat);
+    
     card.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
-    card.scale.set(0.2, 0.2, 0.2); // start small
+
+    card.scale.set(0.1, 0.1, 0.1); // start small
     cards.push(card);
     group.add(card);
+
   }
 
   // Small sphere inside (for after zoom)
@@ -54,13 +67,18 @@ function init() {
 
   runTimeline();   // start animation automatically
   window.addEventListener('resize', onResize);
+
+  // handle clicking & mouse move once everything is loaded
+  window.addEventListener('click', onClick);
+  window.addEventListener('mousemove', onMouseMove);
+
 }
 
 function runTimeline() {
   // ---- Stage 1: appear + grow while swirling ----
   cards.forEach((card, idx) => {
     gsap.to(card.material, { opacity: 1, duration: 1, delay: idx * 0.02 });
-    gsap.to(card.scale, { x: 1, y: 1, z: 1, duration: 1, delay: idx * 0.02 });
+    gsap.to(card.scale, { x: 2, y: 2, z: 2, duration: 1, delay: idx * 0.02 });
   });
 
   // swirl
@@ -79,7 +97,9 @@ function runTimeline() {
       ease: "power2.inOut",
       onUpdate: () => {
         card.lookAt(0, 0, 0);  // make it face the center
+
       }
+      
     });
   });
 
@@ -93,6 +113,9 @@ function runTimeline() {
     repeat: -1,
     ease: "none",
     delay: 4
+    
+    
+    
   });
 
   // ---- Stage 4: zoom into inside ----
@@ -104,6 +127,9 @@ function runTimeline() {
       ease: "power2.inOut",
       onComplete: () => {
         innerSphere.visible = true;
+        clickable = true;  
+
+
       }
     });
 }
@@ -126,6 +152,14 @@ function computeSpherePositions(count, r) {
 
 function animate() {
   requestAnimationFrame(animate);
+  // When inside the sphere, move camera toward mouse
+  if (clickable) {
+    camera.position.x += (targetCameraX - camera.position.x) * 0.05;
+    camera.position.y += (targetCameraY - camera.position.y) * 0.05;
+  
+    
+  }
+
   renderer.render(scene, camera);
 }
 
@@ -133,4 +167,32 @@ function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+
 }
+
+function onClick(event) {
+  if (!clickable) return;
+
+  // Normalize mouse coordinates (-1 to +1)
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects(cards);
+  if (intersects.length > 0) {
+    const card = intersects[0].object;
+    console.log('Clicked card:', card);
+
+    // Example: highlight clicked card
+    card.material.color.set(0xff0000);
+  }
+}
+
+function onMouseMove(event) {
+  if (!clickable) return;           // only when inside sphere
+  targetCameraX = (event.clientX / window.innerWidth - 0.5) * 2; // sensitivity
+  targetCameraY = -(event.clientY / window.innerHeight - 0.5) * 2;
+}
+
+
