@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Three.js Cards Test</title>
+  <meta charset="UTF-8" />
+  <title>Iva3DWebsite</title>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <style>
     body { margin:0; overflow:hidden; background:#fff; }
-    #startBtn {
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      background:rgb(230, 226, 226);
-      color:rgb(27, 25, 25);
-      font-size:2rem;
-      padding:40px 60px;
-      border-radius:50%;
-      cursor:pointer;
-      z-index:2;
+    canvas { position:fixed; inset:0; z-index:1; }
+    #loader {
+      position:fixed; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      background:#fff;
+      z-index:9999;
+      font:300 2rem/1 sans-serif;
+      color:#000;
+    }
+    #loader.fade-out {
+      opacity:0;
+      transition: opacity 0.8s ease;
     }
   </style>
 </head>
 <body>
-  <!-- <div id="startBtn">Start</div>  -->
+  <!-- ✅ Loader with span -->
+  <div id="loader">
+    <span id="loaderText"></span>
+  </div>
+
+  <!-- ✅ Typewriter (forward-only, one time) -->
+  <script>
+    (function startTypewriter(){
+      const text = "Loading...";
+      const el = document.getElementById('loaderText');
+      el.textContent = "";   // start empty
+    
+      let i = 0;
+      const typingSpeed = 120; // ms between characters
+    
+      function tick() {
+        el.textContent = text.slice(0, i + 1);
+        i++;
+    
+        if (i < text.length) {
+          setTimeout(tick, typingSpeed);
+        } else {
+          // Finished typing full word → tell main.js we’re ready
+          window.loadingFinished = true;
+        }
+      }
+    
+      tick();
+    })();
+  </script>
+
+  <!-- ✅ Your Three.js code -->
   <script type="module" src="./src/main.js"></script>
 </body>
 </html>
