@@ -156,7 +156,7 @@ function runTimeline() {
     gsap.to(card.scale, { x: 2, y: 2, z: 2, duration: 1, delay: idx * 0.02 });
   });
 
-  gsap.to(group.rotation, { z: "+=6.28", duration: 5, ease: "power1.inOut" });
+  gsap.to(group.rotation, { z: "+=6.28", duration: 2, ease: "power1.inOut" });
 
   const sphereTargets = computeSpherePositions(CARD_COUNT, radius);
   
