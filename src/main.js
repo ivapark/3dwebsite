@@ -1,5 +1,3 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js';
-
 let scene, camera, renderer, group, innerSphere;
 let cards = [];
 let clickable = false;
@@ -8,12 +6,45 @@ let targetCameraX = 0, targetCameraY = 0;
 const CARD_COUNT = 20;
 const radius = 16;
 
+const loader = new THREE.TextureLoader();
+
+// Loader flags
+let typingDone = false;
+let texturesDone = false;
+
 // ---- STARTUP ----
-// Wait one animation frame so loader paints *before* images start loading
-requestAnimationFrame(() => {
-  init();
-  animate();
-});
+init();
+animate();
+startTypewriter();
+
+// ---- TYPEWRITER ----
+function startTypewriter(){
+  const text = "Loading...";
+  const el = document.getElementById('loaderText');
+  el.textContent = "";
+  
+  let i = 0;
+  const typingSpeed = 120;
+  let cycles = 0;
+  const maxCycles = 3; // Run 3 cycles
+  
+  function tick() {
+    if (i < text.length) {
+      el.textContent = text.slice(0, i + 1);
+      i++;
+      setTimeout(tick, typingSpeed);
+    } else {
+      cycles++;
+      if (cycles < maxCycles && !texturesDone) {
+        setTimeout(() => { i = 0; el.textContent = ""; tick(); }, 500);
+      } else {
+        typingDone = true;
+        checkReady();
+      }
+    }
+  }
+  tick();
+}
 
 function init() {
   scene = new THREE.Scene();
@@ -28,49 +59,45 @@ function init() {
   group = new THREE.Group();
   scene.add(group);
 
-  const loadingDiv = document.getElementById('loader');
-  const typingInterval = window.loadingInterval;
-
-  // Loader manager ensures we don’t remove loader until all textures are done
-  const manager = new THREE.LoadingManager(() => {
-    function tryRemoveLoader() {
-      if (window.loadingFinished) {
-        const loaderEl = document.getElementById('loader');
-        loaderEl.classList.add('fade-out');
-        setTimeout(() => {
-          loaderEl.remove();
-          runTimeline();
-        }, 800); // match fade-out duration
-      } else {
-        requestAnimationFrame(tryRemoveLoader);
-      }
-    }
-    tryRemoveLoader();
-  });
-  
-  
-  
-  
-  
+  // --- Create a LoadingManager ---
+  const manager = new THREE.LoadingManager();
+  manager.onLoad = function () {
+    // All textures finished loading
+    texturesDone = true;
+    checkReady();
+  };
 
   const loader = new THREE.TextureLoader(manager);
-  const geom = new THREE.PlaneGeometry(2.4, 2);
 
+  const placeholderMat = new THREE.MeshBasicMaterial({
+    color: 0xeeeeee,  // light gray placeholder
+    side: THREE.DoubleSide
+  });
+  
+
+  // --- Replace color cards with images ---
   for (let i = 0; i < CARD_COUNT; i++) {
     const angle = (i / CARD_COUNT) * Math.PI * 2;
-    const texture = loader.load(`./assets/images/img${i + 1}.svg`);
-    const mat = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      opacity: 0,
-      side: THREE.DoubleSide
-    });
-    const card = new THREE.Mesh(geom, mat);
+  
+    // Each card starts with the placeholder
+    const card = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 2), placeholderMat.clone());
     card.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
     card.scale.set(0.1, 0.1, 0.1);
     cards.push(card);
     group.add(card);
+  
+    // Load the actual texture asynchronously
+    const texture = loader.load(
+      `../assets/images/img${i+1}.jpg`,
+      (tex) => {
+        // On load → swap the texture + fade in
+        card.material.map = tex;
+        card.material.needsUpdate = true;
+        gsap.fromTo(card.material, { opacity: 0 }, { opacity: 1, duration: 1 });
+      }
+    );
   }
+  
 
   innerSphere = new THREE.Mesh(
     new THREE.SphereGeometry(2, 32, 32),
@@ -79,35 +106,74 @@ function init() {
   innerSphere.visible = false;
   scene.add(innerSphere);
 
+
   window.addEventListener('resize', onResize);
   window.addEventListener('mousemove', onMouseMove);
   window.addEventListener('click', onClick);
 }
 
+// ---- CHECK READY ----
+function checkReady() {
+  if (typingDone && texturesDone) {
+    const loaderEl = document.getElementById('loader');
+    loaderEl.classList.add('fade-out');
+    setTimeout(() => {
+      loaderEl.remove();
+      runTimeline();
+    }, 800);
+  }
+}
+
 function runTimeline() {
+  // Animate cards appearing
   cards.forEach((card, idx) => {
     gsap.to(card.material, { opacity: 1, duration: 1, delay: idx * 0.02 });
     gsap.to(card.scale, { x: 2, y: 2, z: 2, duration: 1, delay: idx * 0.02 });
   });
+
   gsap.to(group.rotation, { z: "+=6.28", duration: 5, ease: "power1.inOut" });
 
   const sphereTargets = computeSpherePositions(CARD_COUNT, radius);
+  
   cards.forEach((card, idx) => {
     const t = sphereTargets[idx];
+  
+    // Animate position
     gsap.to(card.position, {
       x: t.x, y: t.y, z: t.z,
-      delay: 1.2, duration: 2, ease: "power2.inOut",
-      onUpdate: () => card.lookAt(0, 0, 0)
+      delay: 1.2, duration: 2, ease: "power2.inOut"
+    });
+  
+    // Smoothly rotate so the card faces outward from the center
+    const startQuat = card.quaternion.clone();
+  
+    // compute outward direction (from center through target position)
+    const outward = t.clone().normalize().add(card.position);
+    card.lookAt(outward);
+    const endQuat = card.quaternion.clone();
+  
+    // reset back to start rotation before animating
+    card.quaternion.copy(startQuat);
+  
+    gsap.to(card.quaternion, {
+      x: endQuat.x,
+      y: endQuat.y,
+      z: endQuat.z,
+      w: endQuat.w,
+      delay: 1.2,
+      duration: 2,
+      ease: "power2.inOut",
+      onUpdate: () => card.quaternion.normalize()
     });
   });
+  
 
   gsap.fromTo(group.rotation, { x: Math.PI / 2 }, { x: 0, y: Math.PI / 6, duration: 3, delay: 1.2 });
   gsap.to(group.rotation, { y: "+=6.28", duration: 40, repeat: -1, ease: "none", delay: 4 });
 
   gsap.timeline({ delay: 3 })
     .to(camera.position, { z: 25, duration: 2, ease: "power2.inOut" })
-    .to(camera.position, {
-      z: 10, duration: 2, ease: "power2.inOut",
+    .to(camera.position, { z: 10, duration: 2, ease: "power2.inOut",
       onComplete: () => { innerSphere.visible = true; clickable = true; }
     });
 }
@@ -141,9 +207,13 @@ function onResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
 function onMouseMove(e) {
   if (!clickable) return;
   targetCameraX = (e.clientX / window.innerWidth - 0.5) * 2;
   targetCameraY = -(e.clientY / window.innerHeight - 0.5) * 2;
 }
-function onClick(e) { /* optional raycasting later */ }
+
+function onClick(e) {
+  // Raycasting / interactions can go here later
+}
