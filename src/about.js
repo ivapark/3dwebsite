@@ -110,14 +110,6 @@ function init() {
       innerSphere.scale.set(2, 2, 2);       // Adjust as needed
       innerSphere.position.set(0, 0, 0);
       innerSphere.visible = false;             // Start hidden
-      innerSphere.traverse(obj => {
-        if (obj.isMesh) {
-          obj.material.transparent = true;
-          obj.material.opacity = 0;   // start invisible
-        }
-      });
-
-      
       scene.add(innerSphere);
   
       // Center it using bounding box
@@ -197,26 +189,10 @@ function runTimeline() {
   gsap.to(group.rotation, { y: "+=6.28", duration: 40, repeat: -1, ease: "none", delay: 4 });
 
   gsap.timeline({ delay: 3 })
-  .to(camera.position, { z: 25, duration: 2, ease: "power2.inOut" })
-  .to(camera.position, { z: 10, duration: 2, ease: "power2.inOut",
-    onComplete: () => {
-      innerSphere.visible = true;
-      clickable = true;
-
-      // Fade in only (no scale change)
-      innerSphere.traverse(obj => {
-        if (obj.isMesh) {
-          gsap.to(obj.material, {
-            opacity: 1,
-            duration: 2,
-            ease: "power2.out"
-          });
-        }
-      });
-    }
-  });
-
-
+    .to(camera.position, { z: 25, duration: 2, ease: "power2.inOut" })
+    .to(camera.position, { z: 10, duration: 2, ease: "power2.inOut",
+      onComplete: () => { innerSphere.visible = true; clickable = true; }
+    });
 }
 
 function computeSpherePositions(count, r) {
@@ -256,6 +232,65 @@ function onMouseMove(e) {
 }
 
 function onClick(e) {
-  // Raycasting / interactions can go here later
+  if (clickable && innerSphere.visible) {
+    shatterRock();
+  }
 }
 
+
+function shatterRock() {
+  if (!innerSphere) return;
+
+  innerSphere.visible = false;
+
+  innerSphere.traverse(obj => {
+    if (obj.isMesh) {
+      const geom = obj.geometry;
+      geom.computeBoundingBox();
+      const mat = obj.material.clone();
+
+      // Break into smaller chunks by cloning random faces
+      const position = geom.attributes.position;
+      for (let i = 0; i < position.count; i += 3) {
+        const vertices = [];
+        for (let j = 0; j < 3; j++) {
+          const v = new THREE.Vector3().fromBufferAttribute(position, i + j);
+          vertices.push(v);
+        }
+
+        // Build a tiny geometry (triangle)
+        const smallGeom = new THREE.BufferGeometry().setFromPoints(vertices);
+        smallGeom.setIndex([0, 1, 2]);
+
+        const piece = new THREE.Mesh(smallGeom, mat.clone());
+        piece.position.copy(innerSphere.position);
+        scene.add(piece);
+
+        // Animate outward
+        const dir = new THREE.Vector3(
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 20
+        );
+        gsap.to(piece.position, {
+          x: dir.x,
+          y: dir.y,
+          z: dir.z,
+          duration: 2,
+          ease: "power2.out"
+        });
+        gsap.to(piece.material, {
+          opacity: 0,
+          duration: 1.5,
+          delay: 1,
+          onComplete: () => scene.remove(piece)
+        });
+      }
+    }
+  });
+
+  // After the effect, navigate
+  setTimeout(() => {
+    window.location.href = "about.html";  // your about page
+  }, 2000);
+}
