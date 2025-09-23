@@ -1,3 +1,6 @@
+
+
+
 let scene, camera, renderer, group, innerSphere;
 let cards = [];
 let clickable = false;
@@ -99,12 +102,26 @@ function init() {
   }
   
 
-  innerSphere = new THREE.Mesh(
-    new THREE.SphereGeometry(2, 32, 32),
-    new THREE.MeshBasicMaterial({ color: 0x000000 })
+  const gltfLoader = new THREE.GLTFLoader();
+  gltfLoader.load(
+    './assets/models/igneous_rock_basalt/scene.gltf',
+    (gltf) => {
+      innerSphere = gltf.scene;                // <--- Save it here
+      innerSphere.scale.set(2, 2, 2);       // Adjust as needed
+      innerSphere.position.set(0, 0, 0);
+      innerSphere.visible = false;             // Start hidden
+      scene.add(innerSphere);
+  
+      // Center it using bounding box
+      const box = new THREE.Box3().setFromObject(innerSphere);
+      const center = box.getCenter(new THREE.Vector3());
+      innerSphere.position.sub(center);        // recenters the geometry to (0,0,0)
+    },
+    undefined,
+    (err) => console.error("GLTF load error:", err)
   );
-  innerSphere.visible = false;
-  scene.add(innerSphere);
+  
+
 
 
   window.addEventListener('resize', onResize);

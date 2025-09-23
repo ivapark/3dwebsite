@@ -1,0 +1,8 @@
+Model Information:
+* title:	Igneous rock: Basalt (A'a Lava Rock)
+* source:	https://sketchfab.com/3d-models/igneous-rock-basalt-aa-lava-rock-cbbe1e1ae71b4e44acc6bf1b5245f1bb
+* author:	Digital Atlas of Ancient Life (https://sketchfab.com/DigitalAtlasOfAncientLife)
+
+Model License:
+* license type:	CC0-1.0 (http://creativecommons.org/publicdomain/zero/1.0/)
+* requirements:	Credit is not mandatory. Commercial use is allowed.
