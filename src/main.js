@@ -1,6 +1,3 @@
-
-
-
 let scene, camera, renderer, group, innerSphere;
 let cards = [];
 let clickable = false;
@@ -197,13 +194,14 @@ function runTimeline() {
   gsap.to(group.rotation, { y: "+=6.28", duration: 40, repeat: -1, ease: "none", delay: 4 });
 
   gsap.timeline({ delay: 3 })
-  .to(camera.position, { z: 25, duration: 2, ease: "power2.inOut" })
-  .to(camera.position, { z: 10, duration: 2, ease: "power2.inOut",
-    onComplete: () => {
+  //.to(camera.position, { z: 25, duration: 1, ease: "power2.inOut" })
+  .to(camera.position, { 
+    z: 10, 
+    duration: 2, 
+    ease: "power2.inOut",
+    onStart: () => {   // <--- change here
       innerSphere.visible = true;
-      clickable = true;
-
-      // Fade in only (no scale change)
+  
       innerSphere.traverse(obj => {
         if (obj.isMesh) {
           gsap.to(obj.material, {
@@ -213,8 +211,12 @@ function runTimeline() {
           });
         }
       });
+    },
+    onComplete: () => {
+      clickable = true; // only enable interaction after zoom finishes
     }
   });
+  
 
 
 }
