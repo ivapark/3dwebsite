@@ -85,3 +85,47 @@ function onMouseMove(e) {
   targetCameraX = (e.clientX / window.innerWidth - 0.5) * 2;
   targetCameraY = -(e.clientY / window.innerHeight - 0.5) * 2;
 }
+
+
+// --- Fade-out + zoom-out transition for About page ---
+function setupPageTransitions() {
+  const navLinks = document.querySelectorAll(".nav-links a");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      const targetUrl = link.getAttribute("href");
+
+      // 1) Skip if staying on About page
+      if (targetUrl.includes("about.html")) return;
+
+      e.preventDefault(); // stop instant navigation
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          window.location.href = targetUrl;
+        }
+      });
+
+      // 2) Animate limestone rock backward & fade meshes
+      if (limestone) {
+        tl.to(limestone.position, { z: -50, duration: 1.5, ease: "power2.inOut" }, 0);
+        tl.to(limestone.rotation, { y: "+=0", duration: 1.5, ease: "power2.inOut" }, 0);
+
+        // traverse meshes to fade materials
+        limestone.traverse(obj => {
+          if (obj.isMesh && obj.material) {
+            obj.material.transparent = true;
+            tl.to(obj.material, { opacity: 0, duration: 1 }, 0.5);
+          }
+        });
+      }
+
+      // 3) Animate text/images fading & scaling
+      tl.to("#aboutHeader", { opacity: 0, scale: 0.8, duration: 1, ease: "power2.inOut" }, 0);
+    });
+  });
+}
+
+// Call after DOM is ready
+window.addEventListener("DOMContentLoaded", setupPageTransitions);
+

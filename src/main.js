@@ -257,28 +257,42 @@ function onMouseMove(e) {
   targetCameraY = -(e.clientY / window.innerHeight - 0.5) * 2;
 }
 
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
 function onClick(e) {
-  if (!clickable) return;
-  clickable = false;
+  if (!clickable || !innerSphere) return;
 
-  const tl = gsap.timeline({
-    onComplete: () => {
-      // After fade + zoom out → load About page
-      window.location.href = "./pages/about.html";
-    }
-  });
+  // Normalize mouse coords (-1 to +1)
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
-  // Zoom camera back
-  tl.to(camera.position, { z: 100, duration: 1.5, ease: "power2.inOut" });
+  // Cast ray from camera through mouse position
+  raycaster.setFromCamera(mouse, camera);
 
-  // Cards fade & shrink
-  cards.forEach(card => {
-    tl.to(card.material, { opacity: 0, duration: 1 }, "<"); 
-    tl.to(card.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 1 }, "<");
-  });
+  // Check intersections with the igneous rock
+  const intersects = raycaster.intersectObject(innerSphere, true);
 
-  // Igneous rock fades
-  if (innerSphere) {
+  if (intersects.length > 0) {
+    clickable = false;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // After fade + zoom out → load About page
+        window.location.href = "./pages/about.html";
+      }
+    });
+
+    // Zoom camera back
+    tl.to(camera.position, { z: 100, duration: 1.5, ease: "power2.inOut" });
+
+    // Cards fade & shrink
+    cards.forEach(card => {
+      tl.to(card.material, { opacity: 0, duration: 1 }, "<"); 
+      tl.to(card.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 1 }, "<");
+    });
+
+    // Igneous rock fades
     innerSphere.traverse(obj => {
       if (obj.isMesh) {
         tl.to(obj.material, { opacity: 0, duration: 1 }, "<");
@@ -286,6 +300,10 @@ function onClick(e) {
     });
   }
 }
+
+// Attach event listener
+window.addEventListener("click", onClick);
+
 
 
 
