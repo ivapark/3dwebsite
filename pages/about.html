@@ -3,13 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <title>About Me</title>
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/BufferGeometryUtils.js"></script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    body { margin:0; overflow:hidden; background:#fff; font-family: sans-serif; }
+    canvas { position:fixed; inset:0; z-index:1; }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: transparent;
+      z-index: 10000;
+    }
+    .site-header .logo img {
+      height: 32px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+    .nav-links a {
+      font-family: sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      color: #000;
+      letter-spacing: 1px;
+      transition: opacity 0.2s ease;
+    }
+    .nav-links a:hover {
+      opacity: 0.6;
+    }
+
+    /* Loader (if needed later) */
+    #loader {
+      position:fixed; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      background:#fff;
+      z-index:9999;
+      font:300 2rem/1 sans-serif;
+      color:#000;
+    }
+    #loader.fade-out {
+      opacity:0;
+      transition: opacity 0.8s ease;
+    }
+    #loaderText::after {
+      content: '';
+      animation: blink 1s infinite;
+    }
+  </style>
 </head>
 <body>
-  <div id="about-container">
+  
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../assets/images/logo.jpg" alt="Logo">
+      </a>
+    </div>
+    <nav class="nav-links">
+      <a href="about.html">ABOUT ME</a>
+      <a href="work.html">MY WORK</a>
+      <a href="rock.html">WHY ROCK</a>
+    </nav>
+  </header>
+
+  <!-- Page content -->
+  <div id="aboutHeader" style="opacity:0; transform: translateY(20px); position:relative; z-index:2; padding-top:80px;">
     <h1>About Me</h1>
-    <p>Hi, I’m Iva …</p>
+    <p>This is my About Me page with limestone rock animation.</p>
   </div>
-  <script type="module" src="./src/about.js"></script>
+
+  <!-- Your JS -->
+  <script type="module" src="../src/about.js"></script>
 </body>
 </html>

@@ -19,3 +19,42 @@ body {
     z-index: 2;
   }
 
+
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px;
+    background: transparent;
+    z-index: 10000;
+    box-sizing: border-box;
+  }
+  
+  .site-header .logo img {
+    height: 40px;       /* fixes tiny logo issue */
+    display: block;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 48px;
+  }
+  
+  .nav-links a {
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+    letter-spacing: 1px;
+    transition: opacity 0.2s ease;
+  }
+  
+  .nav-links a:hover {
+    opacity: 0.6;
+  }
+  

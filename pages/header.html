@@ -1,0 +1,23 @@
+<header class="site-header">
+  <div class="logo">
+    <a href="../index.html">
+      <img src="../assets/images/logo.jpg" alt="Logo">
+    </a>
+  </div>
+  <nav class="nav-links">
+    <a href="about.html" class="nav-link">ABOUT ME</a>
+    <a href="work.html" class="nav-link">MY WORK</a>
+    <a href="rock.html" class="nav-link">WHY ROCK</a>
+  </nav>
+</header>
+
+
+<script>
+  // Automatically highlight the active link
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach(link => {
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+      link.classList.add('active');
+    }
+  });
+</script>

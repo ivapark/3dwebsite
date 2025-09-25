@@ -258,6 +258,35 @@ function onMouseMove(e) {
 }
 
 function onClick(e) {
-  // Raycasting / interactions can go here later
+  if (!clickable) return;
+  clickable = false;
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+      // After fade + zoom out → load About page
+      window.location.href = "./pages/about.html";
+    }
+  });
+
+  // Zoom camera back
+  tl.to(camera.position, { z: 100, duration: 1.5, ease: "power2.inOut" });
+
+  // Cards fade & shrink
+  cards.forEach(card => {
+    tl.to(card.material, { opacity: 0, duration: 1 }, "<"); 
+    tl.to(card.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 1 }, "<");
+  });
+
+  // Igneous rock fades
+  if (innerSphere) {
+    innerSphere.traverse(obj => {
+      if (obj.isMesh) {
+        tl.to(obj.material, { opacity: 0, duration: 1 }, "<");
+      }
+    });
+  }
 }
+
+
+
 
