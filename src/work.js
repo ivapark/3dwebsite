@@ -22,23 +22,33 @@ function init() {
     '../assets/models/pink_quartzite/scene.gltf',
     (gltf) => {
       limestone = gltf.scene;
-      limestone.scale.set(2, 2, 2);
-      limestone.position.set(0, 0, -50); // start far away
       scene.add(limestone);
   
-      // --- Recenter limestone ---
+      // --- Normalize size ---
       const box = new THREE.Box3().setFromObject(limestone);
-      const center = box.getCenter(new THREE.Vector3());
-      limestone.position.sub(center); // shifts geometry so center is at (0,0,0)
-      limestone.position.z = -50;     // push it back again after recentering
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scaleFactor = 6 / maxDim;  // target size ~10 units
+      limestone.scale.setScalar(scaleFactor);
   
-      // Animate limestone forward
+      // --- Recompute box AFTER scaling ---
+      const box2 = new THREE.Box3().setFromObject(limestone);
+      const center = box2.getCenter(new THREE.Vector3());
+  
+      // --- Recenter to origin ---
+      limestone.position.sub(center);
+  
+      // --- Push back in Z ---
+      limestone.position.z = -50;
+  
+      // Animate forward
       gsap.to(limestone.position, { z: 0, duration: 2, ease: "power2.out" });
   
-      // Fade in header after 1s
+      // Fade in header
       gsap.to("#aboutHeader", { opacity: 1, y: 0, duration: 1.5, delay: 1 });
     }
   );
+  
   
   
 

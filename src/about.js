@@ -17,6 +17,9 @@ function init() {
   renderer.setClearColor(0xffffff);
   document.body.appendChild(renderer.domElement);
 
+  renderer.outputEncoding = THREE.sRGBEncoding;
+
+
   const gltfLoader = new THREE.GLTFLoader();
   gltfLoader.load(
     '../assets/models/limestone/scene.gltf',
@@ -32,6 +35,16 @@ function init() {
       limestone.position.sub(center); // shifts geometry so center is at (0,0,0)
       limestone.position.z = -50;     // push it back again after recentering
   
+
+      // Add lights
+      const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
+      hemiLight.position.set(0, 20, 0);
+      scene.add(hemiLight);
+
+      const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
+      dirLight.position.set(5, 10, 7.5);
+      scene.add(dirLight);
+
       // Animate limestone forward
       gsap.to(limestone.position, { z: 0, duration: 2, ease: "power2.out" });
   
