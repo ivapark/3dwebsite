@@ -28,26 +28,40 @@ function init() {
       const box = new THREE.Box3().setFromObject(pink_quartzite);
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scaleFactor = 8 / maxDim;  // target size ~10 units
+      const scaleFactor = 8 / maxDim;
       pink_quartzite.scale.setScalar(scaleFactor);
   
-      // --- Recompute box AFTER scaling ---
+      // --- Recenter ---
       const box2 = new THREE.Box3().setFromObject(pink_quartzite);
       const center = box2.getCenter(new THREE.Vector3());
-  
-      // --- Recenter to origin ---
       pink_quartzite.position.sub(center);
   
-      // --- Push back in Z ---
-      pink_quartzite.position.z = -50;
+      // --- Place at final position ---
+      pink_quartzite.position.z = 0;
   
-      // Animate forward
-      gsap.to(pink_quartzite.position, { z: 0, duration: 2, ease: "power2.out" });
+      // --- Set initial opacity 0 for all meshes ---
+      pink_quartzite.traverse(obj => {
+        if (obj.isMesh) {
+          obj.material.transparent = true;
+          obj.material.opacity = 0;
+        }
+      });
   
-      // Fade in header
-      gsap.to("#aboutHeader", { opacity: 1, y: 0, duration: 1.5, delay: 1 });
+      // --- Fade in stone & header together ---
+      gsap.to("#aboutHeader", { opacity: 1, y: 0, duration: 1.5, delay: 0.5 });
+      pink_quartzite.traverse(obj => {
+        if (obj.isMesh) {
+          gsap.to(obj.material, {
+            opacity: 1,
+            duration: 1.5,
+            delay: 0.5,
+            ease: "power2.out"
+          });
+        }
+      });
     }
   );
+  
   
   
   
@@ -125,6 +139,8 @@ function setupPageTransitions() {
       });
     });
   }
+
+  
   
   // Call after DOM is ready
   window.addEventListener("DOMContentLoaded", setupPageTransitions);

@@ -67,6 +67,36 @@
       font-size: 30px;
       font-family: 'Nanum Brush Script', cursive;
     }
+    #transition {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      pointer-events: none;
+    }
+    
+    .layer {
+      flex: 1; 
+      background-size: cover;
+      background-blend-mode: multiply; /* blend color + texture */
+      opacity: 0; 
+      transform: translateY(100%);
+    }
+
+    /* Specific layer colors */
+    .layer1 {
+      background: #B4ABA1 url("../assets/images/rock-texture.png");
+    }
+    .layer2 {
+      background: #353331 url("../assets/images/rock-texture.png");
+    }
+    .layer3 {
+      background: #F5F1E1 url("../assets/images/rock-texture.png");
+    }
+    .layer4 {
+      background: #2D1D11 url("../assets/images/rock-texture.png");
+    }
 
     /* Falling skill rocks */
     .falling-skill {
@@ -123,7 +153,75 @@
   <div class="falling-skill">Docker</div>
   <div class="falling-skill">Figma</div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const workLink = document.querySelector("a[href='work.html']");
+      if (workLink) {
+        workLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          playTransition("work.html");
+        });
+      }
+    });
+  
+    function playTransition(nextUrl) {
+      const layers = document.querySelectorAll(".layer");
+      const aboutContent = document.querySelector(".about-content");
+      const header = document.querySelector(".site-header");
+      const rocks = document.querySelectorAll(".falling-skill");
+
+  
+      // Immediately hide page content behind the transition
+      if (aboutContent) aboutContent.style.opacity = "0";
+      if (header) header.style.opacity = "0";
+      if (rocks.length) rocks.forEach(r => r.style.display = "none");
+
+  
+      // Step 1: Animate IN (bottom → top, so reverse order)
+      [...layers].reverse().forEach((layer, i) => {
+        gsap.to(layer, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          delay: i * 0.2,
+          ease: "power2.inOut"
+        });
+      });
+  
+      // Step 2: Animate OUT (top → bottom, normal order)
+      setTimeout(() => {
+        layers.forEach((layer, i) => {
+          gsap.to(layer, {
+            y: "-100%",
+            opacity: 0,
+            duration: 0.6,
+            delay: i * 0.2,
+            ease: "power2.inOut",
+            onComplete: () => {
+              if (i === layers.length - 1) {
+                window.location.href = nextUrl;
+              }
+            }
+          });
+        });
+      }, layers.length * 300 + 800);
+    }
+  </script>
+  
+  
+
+   <!-- Transition Overlay Layers -->
+   <div id="transition">
+    <div class="layer layer4"></div>
+    <div class="layer layer3"></div>
+    <div class="layer layer2"></div>
+    <div class="layer layer1"></div>
+  </div>
+
   <!-- Your JS -->
   <script src="../src/about.js"></script>
 </body>
 </html>
+
+
+  
