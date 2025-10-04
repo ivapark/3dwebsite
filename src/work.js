@@ -28,7 +28,7 @@ function init() {
       const box = new THREE.Box3().setFromObject(pink_quartzite);
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scaleFactor = 6 / maxDim;  // target size ~10 units
+      const scaleFactor = 8 / maxDim;  // target size ~10 units
       pink_quartzite.scale.setScalar(scaleFactor);
   
       // --- Recompute box AFTER scaling ---
@@ -93,6 +93,9 @@ function setupPageTransitions() {
       link.addEventListener("click", (e) => {
         const targetUrl = link.getAttribute("href");
   
+         // 3) Animate text/images fading & scaling
+         tl.to("#aboutHeader", { opacity: 0, scale: 0.8, duration: 1, ease: "power2.inOut" }, 0);
+         
         // 1) Skip if staying on About page
         if (targetUrl.includes("work.html")) return;
   
@@ -118,8 +121,7 @@ function setupPageTransitions() {
           });
         }
   
-        // 3) Animate text/images fading & scaling
-        tl.to("#aboutHeader", { opacity: 0, scale: 0.8, duration: 1, ease: "power2.inOut" }, 0);
+       
       });
     });
   }

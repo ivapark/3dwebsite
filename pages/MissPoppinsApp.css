@@ -1,0 +1,1083 @@
+/* GLOBAL FONT */
+body {
+    font-family: 'Kufam', sans-serif !important;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+
+}
+
+.mp-video {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+}
+
+
+/* TYPOGRAPHY SCALE */
+.mp-title {
+    font-family: 'Kufam', sans-serif !important;
+    font-size: 48px !important;
+    font-weight: 700; /* Bold */
+    color: #4f0d81;
+
+}
+
+.mp-subtitle {
+    font-size: 32px !important;
+    font-weight: 300 !important;
+    margin-bottom: 3.5rem;
+    color: #000;
+}
+
+
+.mp-main-text {
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    font-family: 'Inria Sans', sans-serif;
+
+}
+
+.mp-small-text {
+    font-size: 16px;
+    font-weight: 300!important;
+}
+
+  
+  /* LAYOUT */
+  .mp-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5rem 9rem;
+    background-color: white;
+    min-height: 100vh;
+    margin-top: 60px;
+    margin-bottom: -200px;
+  }
+  
+  /* TEXT SECTION */
+  .mp-text-section {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: -280px;
+  }
+  
+  .mp-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 50px;
+  }
+  
+  .mp-info-line {
+    font-weight: lighter;
+    max-width: 80%;
+
+  }
+  
+  .mp-info-line span {
+    font-weight: normal;
+  }
+  
+  /* IMAGE SECTION */
+  .mp-image-section {
+    flex-shrink: 0;
+    margin-top: -180px;
+  }
+  
+  .mp-image {
+    max-width: 300px;
+    height: auto;
+    border-radius: 20px;
+  }
+  
+  /* BACKGROUND SECTION */
+  .mp-background-section {
+    padding: 7rem 0rem;
+    text-align: center;
+    background-color: #fff;
+
+
+  }
+
+  .mp-background-section .mp-title {
+    margin-bottom: 2rem;
+  }
+  
+  
+  .highlight-purple {
+    color: #6c3483;
+    font-weight: 500;
+  }
+  
+  /* ICON GRID */
+  .mp-background-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 0rem 2;
+
+
+  }
+  
+  .mp-background-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 240px;
+    padding: 50px;
+
+  }
+  
+  .mp-background-icon img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .mp-background-small-text{
+    color: #7F7B82;
+    font-weight: 400;
+    width: 150px;
+
+  }
+
+
+
+  /* RESEARCH GOAL SECTION */
+  .mp-research-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 4rem;
+    text-align: center;
+    background-color: #fff;
+
+
+  }
+  
+  .mp-goal-text {
+    max-width: 900px;
+    font-size: 24px !important;
+    text-align: center;
+    margin-top: 50px !important;  /* space between research goal and the explanation */
+    margin-bottom: 50px;
+  }
+  
+  
+  .mp-research-steps {
+    display: flex;
+    justify-content: center;
+    gap: 6rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+
+  }
+  
+  .mp-step {
+    width: 250px; /* Fix the width for uniform alignment */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .step-number {
+    font-weight: 400 !important;
+    color: #7F7B82;
+    margin-bottom: 20px !important;
+
+  }
+  
+  .step-label {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    color: #7F7B82;
+  }
+  
+  .mp-step img {
+    width: 90px;
+    height: auto;
+    margin-top: 40px;
+  }
+  
+  .mp-subcategories {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "one . two. four"
+      ". . three .five";
+    gap: 2rem 2rem;
+    justify-items: center;
+    align-items: center;
+    max-width: 900px;
+    margin: 2rem auto;
+  }
+  
+  .mp-subcategory {
+    display: flex;
+    flex-direction: row; /* change from column to row */
+    align-items: center;
+    text-align: left;
+    width: 200px;
+    gap: 1rem; /* add spacing between icon and text */
+  }
+  
+  .mp-subcategory img {
+    width: 30px;
+    height: auto;
+  }
+  
+  /* Assign each item to its grid area */
+  .mp-subcategory:nth-child(1) { grid-area: one; }
+  .mp-subcategory:nth-child(2) { grid-area: two; }
+  .mp-subcategory:nth-child(3) { grid-area: three; }
+  .mp-subcategory:nth-child(4) { grid-area: four; }
+  .mp-subcategory:nth-child(5) { grid-area: five; }
+  
+
+  .mp-small-text-research{
+    text-align: left;
+    color: #7F7B82;
+    font-size: 12px !important;
+
+  }
+  
+  .mp-note {
+    font-size: 14px !important;
+    color: #666;
+    margin-top: 40px !important;
+    font-style: italic;
+
+  }
+  
+  .mp-conclusion {
+    max-width: 1000px;
+    margin-top: 70px !important;
+  
+
+  }
+
+
+  /* Methodology */
+
+  .mp-methodology-section {
+    padding-top: 4rem;
+    text-align: center;
+    background-color: #fff;
+  }
+  
+  /* Center the list wrapper */
+  .mp-methodology-list-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  /* Align text inside */
+  .mp-methodology-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+    align-items: flex-start;
+    margin-top: 40px;
+    margin-bottom: 70px;
+  }
+  
+
+
+
+  /* Competitive Analysis */
+
+  .mp-analysis-section {
+    text-align: center;
+    margin-top: 4rem;
+  }
+  .mp-subsection-title {
+    font-size: 48px !important;
+    font-weight: 300 !important;
+    margin-bottom: 70px !important;
+  }
+
+  .mp-image-wrapper {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+
+  }
+  
+  .mp-hover-image {
+    width: 400px;
+    height: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 0 0 transparent;
+  }
+  
+  .mp-hover-image:hover {
+    transform: scale(1.5);
+    z-index: 10;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+
+  
+   /*   Key Findings from the Competitive Analysis  */
+
+   .mp-key-findings-section {
+    background-color: #fff;
+    padding: 4rem 3rem;
+    text-align: center;
+    margin-top: 100px;
+    
+  }
+  
+
+  
+  .mp-finding {
+    display: flex;
+    align-items: flex-start;
+    gap: 8rem;
+    max-width: 900px;
+    margin: 70px auto;
+    text-align: left;
+  }
+  
+  .mp-finding img {
+    width: 100px;
+    height: auto;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  
+  .mp-finding-text {
+    flex: 1;
+  }
+  
+  .mp-finding-title {
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    color: #4f0d81;
+    margin-bottom: 20px !important;
+  }
+  
+  .mp-finding-body {
+    font-size: 16px;
+    font-weight: 400;
+    color: #7F7B82;
+    line-height: 1.7;
+    width: 600px;
+  }
+  
+
+  
+
+     /* user interview  */
+     .mp-user-interviews-section {
+      margin-top: 4rem;
+      text-align: center;
+      margin-bottom: 8rem;
+
+    }
+    
+    .mp-subsection-title {
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 7rem !important;
+    }
+    
+    .mp-user-interview-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+    
+    .mp-user-interview-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .mp-user-interview-info img {
+      width: 100px;
+      height: auto;
+    }
+    
+    .mp-user-interview-image {
+      width: 350px;
+      height: auto;
+    }
+    
+
+     /* affinity diagram  */
+     .mp-affinity-section {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 2rem;
+    }
+
+    .mp-affinity-description {
+      max-width: 700px;
+      margin: 3rem auto 3rem auto;
+      font-size: 18px;
+      font-weight: 300! important;
+    }
+    
+    .mp-carousel-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .mp-carousel-image {
+      width: 700px;
+      max-width: 90vw;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .mp-carousel-button {
+      background-color: white;
+      border: 1px solid #ccc;
+      transition: background 0.2s ease;
+    }
+    
+    .mp-carousel-button:hover {
+      background-color: #f5f5f5;
+    }
+    
+
+    /* Research findings */
+
+
+    .mp-findings-section {
+      text-align: center;
+      padding: 9rem 2rem;
+    }
+    
+    .mp-finding-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 4rem;
+    }
+    
+    .mp-finding-icon {
+      width: 50px;
+      height: auto;
+    }
+
+    .mp-finding-icon2 {
+      width: 50px;
+      height: auto;
+      margin-top: 80px !important;
+
+    }
+    
+    .mp-finding-subtitle {
+      font-size: 24px !important;
+      color: #7f7b82;
+      font-weight: 500 !important;
+    }
+
+    .mp-finding-subtitle2 {
+      font-size: 24px !important;
+      color: #7f7b82;
+      font-weight: 500 !important;
+      margin-top: 80px !important;
+    }
+    
+    .mp-finding-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%; 
+      margin-bottom: -70px;
+    }
+    
+    
+    .mp-finding-postit {
+      width: 250px;
+      height: auto;
+      justify-content: center;
+      margin-top: 10px;
+
+    }
+
+    .mp-finding-postit1 {
+      width: 250px;
+      height: auto;
+      justify-content: center;
+      margin-top: 30px;
+
+    }
+
+    .mp-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+    
+    .mp-bottom-row {
+      gap: 4rem; /* make this smaller to pull them closer together if needed */
+    }
+    
+
+    /* How Might We */
+
+    .mp-hmw-section {
+      padding: 14rem 2rem;
+      text-align: center;
+    }
+    
+    .mp-hmw-header {
+      display: flex;
+      justify-content: center;
+      gap: 27rem;
+      margin: 4rem 0 3rem;
+    }
+    
+    .mp-hmw-column {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    
+
+    .mp-hmw-subtitle {
+      font-size: 20px !important;
+      font-weight: 300 !important;
+    }
+
+  
+    
+    .mp-hmw-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .mp-hmw-bubble {
+      max-width: 430px;
+      background-color: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: left;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    
+    .mp-hmw-arrow {
+      width: 80px;
+      height: auto;
+    }
+    
+    .highlight-red {
+      color: #d62828;
+      font-weight: 600;
+    }
+
+
+    /* How Might We 1 */
+  
+    .mp-hmw-answer-section {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Add this to center children */
+    }
+    
+    .mp-hmw-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    
+    .mp-hmw-question {
+      max-width: 900px;
+      font-size: 24px !important;
+      color: #933B3B;
+      font-weight: 400 !important;
+      text-align: center;
+      margin-top: 100px !important;
+      margin-bottom: 50px !important;
+
+    }
+    
+    
+    .mp-hmw-steps {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    
+    .mp-hmw-step {
+      display: flex;
+      align-items: center;
+    }
+    
+    .mp-hmw-icontext {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      max-width: 400px;
+    }
+    
+    .mp-hmw-icon {
+      width: 48px;
+      height: auto;
+      flex-shrink: 0;
+    }
+    
+    .mp-hmw-step-title {
+      font-size: 16px !important;
+      font-weight: 600;
+      text-align: left;
+      width: 340px;
+    }
+    
+    .mp-hmw-step-desc {
+      font-size: 15px;
+      color: #333;
+      margin-top: 0.3rem;
+      line-height: 1.5;
+      text-align: left;
+    }
+    
+    
+    .mp-hmw-before-after-row {
+      display: flex;
+      justify-content: center;
+      gap: 6rem;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    
+    .mp-hmw-combo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .mp-hmw-label {
+      font-weight: 300 !important;
+      font-size: 24px !important;
+      margin-bottom: 1rem !important;
+      margin-left: -280px !important;
+    }
+    
+    .mp-hmw-pair {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+    
+    .mp-hmw-phone {
+      width: 240px;
+      height: 450px;
+      flex-direction: column;
+
+    }
+    
+    .mp-hmw-text {
+      max-width: 250px;
+      text-align: left;
+      color: #818181;
+      font-size: 14px !important;
+      line-height: 1.6;
+      font-weight: 300 !important;
+    }
+
+    
+    
+    /* How Might We 2 */
+
+    .mp-hmw-bullets {
+      font-size: 12px;
+      text-align: left;
+      margin: 2rem 0;
+      padding-left: 1rem;
+      color: #333;
+      width: 350px;
+    }
+
+    .mp-hmw-bullets b {
+      font-weight: 600;
+    }
+    
+    
+    .mp-hmw-refs {
+      font-size: 13px !important;
+      color: #555;
+      text-align: left;
+      line-height: 1.5;
+      font-style: italic;
+      max-width: 900px;
+      margin-top: -60px !important;
+    }
+    
+    .highlight {
+      color: #b23a48;
+      font-weight: 600;
+    }
+    
+    .mp-hmw-icon2{
+      margin-top: -108px !important;
+      width: 48px;
+      height: auto;
+      flex-shrink: 0;
+
+    }
+
+    .mp-hmw-step-title2{
+      margin-top: -108px !important;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+    }
+
+
+    /* How Might We 3 */
+    .hmw3-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+    
+    .hmw3-question {
+      max-width: 900px;
+      font-size: 24px !important;
+      color: #933B3B;
+      font-weight: 400 !important;
+      text-align: center;
+      margin-top: 100px !important;
+      margin-bottom: 50px !important;
+    }
+    
+    .hmw3-step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 4rem;
+      justify-content: center;
+    }
+    
+    .hmw3-icon {
+      width: 48px;
+      height: auto;
+      margin-top: 30px;
+
+    }
+    
+    .hmw3-step-text {
+      text-align: left;
+      max-width: 500px;
+      margin-top: 30px;
+    }
+    
+
+    .mp-hmw-before-after-row3 {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8rem;
+      flex-wrap: wrap;
+      padding: 20px;
+      width: 100%;
+    }
+
+    .mp-hmw-label3{
+      font-weight: 300 !important;
+      font-size: 24px !important;
+      margin-bottom: 1rem !important;
+      margin-right: 260px !important;
+    }
+
+    .mp-hmw-pair3 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1rem;
+      max-width: 600px;
+    }
+    
+
+    .hmw3-bold {
+      font-weight: 600;
+    }
+    
+    .mp-hmw-combo3{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    
+
+    .hmw3-subsection {
+      margin-top: 5rem;
+      padding: 2rem;
+      width: 100%;
+      max-width: 1200px;
+      text-align: left;
+    }
+    
+
+    .hmw3-label3-2{
+      margin-right: 260px !important;
+      font-weight: 300 !important;
+      font-size: 24px !important;
+      margin-bottom: 1rem !important;
+    }
+
+
+    .hmw3-step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 4rem;
+    }
+    
+    .hmw3-icon {
+      width: 48px;
+      height: auto;
+    }
+    
+    .hmw3-step-text {
+      text-align: left;
+      max-width: 600px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #222;
+    }
+    
+    .hmw3-row-slider {
+      display: flex;
+      gap: 8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    
+    .hmw3-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+    }
+    
+    .hmw3-label {
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 1rem;
+      
+    }
+    
+    .hmw3-img-description {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    
+    .mp-video3-2{
+      width: 230px;
+    }
+    
+    .hmw3-text-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.6;
+      width: 250px !important;
+    }
+    
+    .hmw3-caption {
+      font-size: 13px;
+      color: #818181;
+      font-weight: 300 !important;
+    }
+    
+    .hmw3-list {
+      padding-left: 1rem;
+      list-style: decimal;
+      font-size: 14px;
+      font-weight: 300 !important;
+
+    }
+    
+    .hmw3-note {
+      font-size: 13px;
+      color: #818181;
+      font-weight: 300 !important;
+
+    }
+    
+    .hmw3-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #818181;
+      max-width: 250px;
+      font-weight: 300 !important;
+
+    }
+    
+    .hmw3-bold {
+      font-weight: 600;
+    }
+    
+    .hmw3-red {
+      color: #933B3B;
+      font-weight: 600;
+    }
+    
+
+    /* HMW4 Section */
+    .hmw4-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+
+    .hmw4-question {
+      max-width: 900px;
+      font-size: 24px !important;
+      color: #933B3B;
+      font-weight: 400 !important;
+      text-align: center;
+      margin-top: 100px !important;
+      margin-bottom: 60px !important;
+    }
+
+    .hmw4-top-row {
+      display: flex;
+      justify-content: center;
+      gap: 12rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem; /* tighter than before */
+    }
+
+    .hmw4-step {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 0.75rem;
+      text-align: left;
+      width: 350px !important;
+
+    }
+
+    .hmw4-icon {
+      width: 48px;
+      height: auto;
+      margin-top: 3px;
+    }
+
+    .hmw4-step-text {
+      font-size: 14px;
+      color: #333;
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .hmw4-phone-row {
+      display: flex;
+      gap: 20rem; /* wider gap to match image */
+      justify-content: center;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hmw4-phone {
+      width: 300px;
+      height: auto;
+    }
+
+
+    /* Wireframe */
+
+
+    .mp-wireframes-section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .mp-subtitle-wireframe{
+      margin-top: 80px !important;
+      font-size: 32px !important;
+      font-weight: 300 !important;
+      color: #000000;
+    }
+    
+    .mp-wireframes-row {
+      display: flex;
+      justify-content: center;
+      gap: 7rem;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    
+    .mp-wireframe-img {
+      width: 280px;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+
+    .mp-wireframes-button {
+      font-family: 'Inria Sans', sans-serif;
+      margin-top: 4rem;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #80609E;
+      color: white;
+      font-weight: 200;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      
+    }
+    
+    .mp-wireframes-button:hover {
+      background-color: #bba2d2;
+      color: white;
+
+    }
+    

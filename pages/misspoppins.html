@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MissPoppins App Redesign</title>
+  <link rel="stylesheet" href="./MissPoppinsApp.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+  <!-- Header Component (you'll need to include your header here) -->
+  <div id="header">
+    <style>
+      body { margin:0; background:#fff; font-family: sans-serif; }
+      canvas { position:fixed; inset:0; z-index:1;  pointer-events: none; }
+      html, body {
+        height: 100%;
+        overflow-y: auto;
+      }
+  
+      /* Header */
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        background: transparent;
+        z-index: 10000;
+      }
+      .site-header .logo img {
+        height: 32px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+      .nav-links a {
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        color: #000;
+        letter-spacing: 1px;
+        transition: opacity 0.2s ease;
+      }
+      .nav-links a:hover {
+        opacity: 0.6;
+      }
+  
+    </style>
+    <!-- Header -->
+  <header class="site-header">
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../assets/images/logo.jpg" alt="Logo">
+      </a>
+    </div>
+    <nav class="nav-links">
+      <a href="about.html">ABOUT ME</a>
+      <a href="work.html">MY WORK</a>
+      <a href="rock.html" class="active">WHY ROCK</a>
+    </nav>
+  </header>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="mp-container">
+    <div class="mp-text-section">
+      <h1 class="mp-title">MissPoppins App Redesign:</h1>
+      <h2 class="mp-subtitle">Simplifying Navigation and Boosting User Engagement</h2>
+      
+      <div class="mp-info">
+        <p class="mp-main-text mp-info-line">
+          <span style="font-weight: 500;">Overview:</span>
+          <span class="mp-main-text"> Streamlined navigation and introduced strategic pricing to enhance the coach-client experience.</span>
+        </p>
+        <p class="mp-main-text mp-info-line">
+          <span style="font-weight: 500;">Role:</span>
+          <span class="mp-main-text"> UX Researcher, UX/UI Designer</span>
+        </p>
+        <p class="mp-main-text mp-info-line">
+          <span style="font-weight: 500;">Toolkit:</span>
+          <span class="mp-main-text"> Figma, FigJam, Pencil and Paper</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="mp-image-section">
+      <video class="mp-video" src="../assets/misspoppinsapp/misspoppinsappvideo1.mov" autoplay muted loop playsinline></video>
+    </div>
+  </div>
+
+  <!-- Background Section -->
+  <div class="mp-background-section">
+    <h2 class="mp-title">Background</h2>
+    <p class="mp-main-text">
+      <span class="highlight-purple">MissPoppins</span> is an app that connects parents with expert coaches through
+    </p>
+
+    <div class="mp-background-icons">
+      <div class="mp-background-icon">
+        <img src="../assets/misspoppinsapp/consultation.svg" alt="Consultation">
+        <p class="mp-background-small-text">One time free consultation</p>
+      </div>
+      <div class="mp-background-icon">
+        <img src="../assets/misspoppinsapp/videochat.svg" alt="Video Support">
+        <p class="mp-background-small-text">Ongoing support via video calls and chat</p>
+      </div>
+      <div class="mp-background-icon">
+        <img src="../assets/misspoppinsapp/webinars.svg" alt="Articles and Webinars">
+        <p class="mp-background-small-text">Access to articles and webinars</p>
+      </div>
+    </div>
+
+    <p class="mp-main-text">
+      It's a <strong>one-stop</strong> platform for parenting needs like sleep, nutrition, development, and wellness.
+    </p>
+  </div>
+
+  <!-- Research Goal Section -->
+  <div class="mp-research-section">
+    <h2 class="mp-title">Research Goal</h2>
+    <p class="mp-main-text mp-goal-text">
+      The goal is to understand parents' <span class="highlight-purple">needs</span>, 
+      <span class="highlight-purple">preferences</span>, and 
+      <span class="highlight-purple">pain points</span> when seeking coaching services and accessing parenting resources.
+    </p>
+
+    <!-- 3-Step Research Insights -->
+    <div class="mp-research-steps">
+      <div class="mp-step">
+        <p class="mp-small-text step-number">1.</p>
+        <p class="mp-small-text step-label">How parents navigate the process of finding the right coach</p>
+        <img src="../assets/misspoppinsapp/step1.svg" alt="Step 1">
+      </div>
+      <div class="mp-step">
+        <p class="mp-small-text step-number">2.</p>
+        <p class="mp-small-text step-label">What their expectations for consultations and ongoing support</p>
+        <img src="../assets/misspoppinsapp/step2.svg" alt="Step 2">
+      </div>
+      <div class="mp-step">
+        <p class="mp-small-text step-number">3.</p>
+        <p class="mp-small-text step-label">How they engage with articles, webinars, and community features</p>
+        <img src="../assets/misspoppinsapp/step3.svg" alt="Step 3">
+      </div>
+    </div>
+
+    <!-- Subcategory Icons -->
+    <div class="mp-subcategories">
+      <div class="mp-subcategory">
+        <img src="../assets/misspoppinsapp/info-sources.svg" alt="Common Info Sources">
+        <p class="mp-small-text-research">Common Information Sources</p>
+      </div>
+      <div class="mp-subcategory">
+        <img src="../assets/misspoppinsapp/architecture.svg" alt="Confusing Info Architecture">
+        <p class="mp-small-text-research">Confusing Information Architecture for App</p>
+      </div>
+      <div class="mp-subcategory">
+        <img src="../assets/misspoppinsapp/package.svg" alt="Package Pricing">
+        <p class="mp-small-text-research">Package Pricing</p>
+      </div>
+      <div class="mp-subcategory">
+        <img src="../assets/misspoppinsapp/community.svg" alt="Community Support">
+        <p class="mp-small-text-research">Community and Peer Support (Mentorship)</p>
+      </div>
+      <div class="mp-subcategory">
+        <img src="../assets/misspoppinsapp/accessibility.svg" alt="Resource Access">
+        <p class="mp-small-text-research">Resource and Information Accessibility</p>
+      </div>
+    </div>
+
+    <p class="mp-small-text mp-note">
+      (To improve organization and clarity, I added subcategories to provide more detailed insights related to the primary topics)
+    </p>
+    <p class="mp-main-text mp-conclusion">
+      This research aims to inform design improvements that enhance usability, streamline access to resources, and create a supportive and user-friendly experience.
+    </p>
+  </div>
+
+  <!-- Methodology -->
+  <div class="mp-methodology-section">
+    <h2 class="mp-title">Methodologies</h2>
+    <div class="mp-methodology-list-wrapper">
+      <div class="mp-methodology-list">
+        <p class="mp-main-text">1. Competitive analysis</p>
+        <p class="mp-main-text">2. User interviews</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Competitive Analysis -->
+  <div class="mp-analysis-section">
+    <h3 class="mp-subsection-title">1. Competitive analysis</h3>
+    <div class="mp-image-wrapper">
+      <img src="../assets/misspoppinsapp/image2.png" alt="Competitive Analysis Table" class="mp-hover-image">
+    </div>
+  </div>
+
+  <!-- Key Findings from Competitive Analysis -->
+  <div class="mp-key-findings-section">
+    <h3 class="mp-subtitle">Key Findings from the Competitive Analysis</h3>
+
+    <div class="mp-finding">
+      <img src="../assets/misspoppinsapp/strength.svg" alt="Strengths Icon">
+      <div class="mp-finding-text">
+        <h4 class="mp-finding-title">Strengths to Leverage</h4>
+        <p class="mp-finding-body">Competitors excel in personalized support, community engagement, and comprehensive services but often lack direct-to-consumer accessibility.</p>
+      </div>
+    </div>
+
+    <div class="mp-finding">
+      <img src="../assets/misspoppinsapp/opportunity.svg" alt="Opportunity Icon">
+      <div class="mp-finding-text">
+        <h4 class="mp-finding-title">Opportunities for MissPoppins</h4>
+        <p class="mp-finding-body">Build a strong mobile experience, foster community features, and offer accessible services beyond employer partnerships.</p>
+      </div>
+    </div>
+
+    <div class="mp-finding">
+      <img src="../assets/misspoppinsapp/keydiff.svg" alt="Key Differentiator Icon">
+      <div class="mp-finding-text">
+        <h4 class="mp-finding-title">Key Differentiator</h4>
+        <p class="mp-finding-body" style="font-style: italic;">Address accessibility gaps by combining proactive care, personalized support, and community-driven features for all parents.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Interviews -->
+  <div class="mp-user-interviews-section">
+    <h3 class="mp-subsection-title">2. User interviews</h3>
+    <div class="mp-user-interview-content">
+      <div class="mp-user-interview-info">
+        <img src="../assets/misspoppinsapp/number7.svg" alt="7 Interviews">
+        <p class="mp-main-text">user interviews conducted</p>
+      </div>
+      <img src="../assets/misspoppinsapp/userinterview.svg" alt="User Interviewees" class="mp-user-interview-image">
+    </div>
+  </div>
+
+  <!-- Affinity Carousel -->
+  <div class="mp-affinity-section">
+    <h3 class="mp-subtitle">Affinity Mapping</h3>
+    <p class="mp-main-text mp-affinity-description">
+      The affinity diagram below uses different colors to represent insights from each participant:
+    </p>
+
+    <div class="mp-carousel-wrapper">
+      <button class="mp-carousel-button" id="prevBtn">
+        <span>&lt;</span>
+      </button>
+      <img id="carouselImage" src="../assets/misspoppinsapp/image3.svg" alt="Affinity image 1" class="mp-carousel-image">
+      <button class="mp-carousel-button" id="nextBtn">
+        <span>&gt;</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Research Findings -->
+  <div class="mp-findings-section">
+    <h2 class="mp-title">Research Findings</h2>
+
+    <div class="mp-finding-header">
+      <img src="../assets/misspoppinsapp/researchfindingsicon1.svg" alt="Finding Icon" class="mp-finding-icon">
+      <h3 class="mp-subtitle mp-finding-subtitle">1. How parents navigate the process of finding the right coach</h3>
+    </div>
+
+    <div class="mp-finding-body">
+      <img src="../assets/misspoppinsapp/researchfindings1.svg" alt="Finding Insight" class="mp-finding-postit1">
+    </div>
+  </div>
+
+  <!-- Research Finding 2 -->
+  <div class="mp-researchfinding-section">
+    <div class="mp-finding-header">
+      <img src="../assets/misspoppinsapp/researchfindings2icon.svg" class="mp-finding-icon">
+      <h3 class="mp-finding-subtitle">2. What their expectations for consultations and ongoing support</h3>
+    </div>
+
+    <div class="mp-row">
+      <img src="../assets/misspoppinsapp/researchfindings2.svg" class="mp-finding-postit">
+      <img src="../assets/misspoppinsapp/researchfindings2-1.svg" class="mp-finding-postit">
+      <img src="../assets/misspoppinsapp/researchfindings2-2.svg" class="mp-finding-postit">
+    </div>
+
+    <div class="mp-row mp-bottom-row">
+      <img src="../assets/misspoppinsapp/researchfindings2-3.svg" class="mp-finding-postit">
+      <img src="../assets/misspoppinsapp/researchfindings2-4.svg" class="mp-finding-postit">
+    </div>
+  </div>
+
+  <!-- Research Finding 3 -->
+  <div class="mp-researchfinding-section">
+    <div class="mp-finding-header">
+      <img src="../assets/misspoppinsapp/researchfindings3icon.svg" class="mp-finding-icon2">
+      <h3 class="mp-finding-subtitle2">3. How they engage with articles, webinars, and community features</h3>
+    </div>
+
+    <div class="mp-row">
+      <img src="../assets/misspoppinsapp/researchfindings3.svg" class="mp-finding-postit">
+      <img src="../assets/misspoppinsapp/researchfindings3-1.svg" class="mp-finding-postit">
+    </div>
+
+    <div class="mp-row mp-bottom-row">
+      <img src="../assets/misspoppinsapp/researchfindings3-2.svg" class="mp-finding-postit">
+      <img src="../assets/misspoppinsapp/researchfindings3-3.svg" class="mp-finding-postit">
+    </div>
+  </div>
+
+  <!-- How Might We -->
+  <div class="mp-hmw-section">
+    <h3 class="mp-subtitle">Turning Key Insights into How Might We Statements</h3>
+
+    <div class="mp-hmw-header">
+      <div class="mp-hmw-column">
+        <img src="../assets/misspoppinsapp/hmwproblem.svg" alt="Problem Icon">
+        <h4 class="mp-hmw-subtitle">Problem</h4>
+      </div>
+      <div class="mp-hmw-column">
+        <img src="../assets/misspoppinsapp/hmwidea.svg" alt="Idea Icon">
+        <h4 class="mp-hmw-subtitle">How Might We</h4>
+      </div>
+    </div>
+
+    <!-- HMW Rows -->
+    <div class="mp-hmw-row">
+      <div class="mp-hmw-bubble">Flexibility in rescheduling appointments and reliable, curated resources are essential.</div>
+      <img src="../assets/misspoppinsapp/yellowarrow.svg" alt="Arrow" class="mp-hmw-arrow">
+      <div class="mp-hmw-bubble">How might we create a platform that offers <span class="highlight-red">flexibility in rescheduling appointments</span> to accommodate the busy schedules of parents?</div>
+    </div>
+
+    <div class="mp-hmw-row">
+      <div class="mp-hmw-bubble">Many prefer pay-per-session models or subscription options depending on the frequency of use.</div>
+      <img src="../assets/misspoppinsapp/yellowarrow.svg" alt="Arrow" class="mp-hmw-arrow">
+      <div class="mp-hmw-bubble">How might we <span class="highlight-red">design a package or session model</span> that feels intuitive and manageable for users, ensuring they aren't overwhelmed by options?</div>
+    </div>
+
+    <div class="mp-hmw-row">
+      <div class="mp-hmw-bubble">Unclear navigation and scattered resources are common frustrations.</div>
+      <img src="../assets/misspoppinsapp/yellowarrow.svg" alt="Arrow" class="mp-hmw-arrow">
+      <div class="mp-hmw-bubble">How might we design a navigation system that <span class="highlight-red">simplifies access to resources</span> and eliminates user frustration?</div>
+    </div>
+
+    <div class="mp-hmw-row">
+      <div class="mp-hmw-bubble">Most parents are open to mentorship opportunities but emphasize the need for trustworthy advice.</div>
+      <img src="../assets/misspoppinsapp/yellowarrow.svg" alt="Arrow" class="mp-hmw-arrow">
+      <div class="mp-hmw-bubble">How might we <span class="highlight-red">build a community</span> that ensures the advice shared is trustworthy and credible?</div>
+    </div>
+  </div>
+
+  <!-- HMW Answer 1 -->
+  <div class="mp-hmw-answer-section">
+    <h3 class="mp-subtitle">Answering How Might We Statements (Design Process)</h3>
+
+    <div class="mp-hmw-container">
+      <p class="mp-hmw-question">
+        How might we create a platform that offers flexibility in rescheduling appointments to accommodate the busy schedules of parents?
+      </p>
+    </div>
+
+    <div class="mp-hmw-steps">
+      <div class="mp-hmw-step">
+        <div class="mp-hmw-icontext">
+          <img src="../assets/misspoppinsapp/calendaricon.svg" alt="Calendar Icon" class="mp-hmw-icon">
+          <div>
+            <p class="mp-hmw-step-title">1. <b>Integrate a scheduling calendar</b></p>
+            <p class="mp-hmw-step-desc">option that allows users to view, manage, and reschedule their appointments seamlessly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mp-hmw-step">
+        <div class="mp-hmw-icontext">
+          <img src="../assets/misspoppinsapp/timeicon.svg" alt="Timer Icon" class="mp-hmw-icon">
+          <div>
+            <p class="mp-hmw-step-title">2. <b>Include real-time availability updates</b></p>
+            <p class="mp-hmw-step-desc">from consultants and automated reminders for upcoming sessions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mp-hmw-before-after-row">
+      <div class="mp-hmw-combo">
+        <p class="mp-hmw-label">Before</p>
+        <div class="mp-hmw-pair">
+          <img src="../assets/misspoppinsapp/hmwbefore1.svg" alt="Before Scheduling" class="mp-hmw-phone">
+          <p class="mp-hmw-text">Currently, the app lacks a scheduling feature, requiring users to communicate with the coach via chat after purchasing a package, which is inconvenient for both parties.</p>
+        </div>
+      </div>
+
+      <div class="mp-hmw-combo">
+        <p class="mp-hmw-label">After</p>
+        <div class="mp-hmw-pair">
+          <img src="../assets/misspoppinsapp/hmwafter1.svg" alt="After Scheduling" class="mp-hmw-phone">
+          <p class="mp-hmw-text">Adding a scheduling calendar with flexible rescheduling capabilities will streamline the process and reduce effort for both users and coaches. <br><br><br><br><br><br><br><br> Providing real-time availability updates, along with reminders, will allow parents to reschedule directly through the app without needing to contact support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HMW Answer 2 -->
+  <div class="mp-hmw-answer-section">
+    <div class="mp-hmw-container">
+      <p class="mp-hmw-question">
+        How might we design a package or session model that feels intuitive and manageable for users, ensuring they aren't overwhelmed by options?
+      </p>
+    </div>
+
+    <div class="mp-hmw-steps">
+      <div class="mp-hmw-step">
+        <div class="mp-hmw-icontext">
+          <img src="../assets/misspoppinsapp/selectchoices.svg" alt="Select Icon" class="mp-hmw-icon">
+          <div>
+            <p class="mp-hmw-step-title">1. <b>Use the Iyengar and Lepper Jam Study and Decoy Effect to <br> structure session packages into three clear tiers:</b></p>
+            <ul class="mp-hmw-bullets">
+              <li><b>Mini:</b> 1 session for those with one-off needs.</li>
+              <li><b>Pro:</b> 3 sessions for short-term or specific support.</li>
+              <li><b>Elite:</b> 9 sessions for comprehensive, long-term guidance.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mp-hmw-step">
+        <div class="mp-hmw-icontext">
+          <img src="../assets/misspoppinsapp/goldstar.svg" alt="Gold Star" class="mp-hmw-icon2">
+          <div>
+            <p class="mp-hmw-step-title2">2. <b>Highlight popular or recommended packages</b> to provide decision-making cues and reduce the feeling of being overwhelmed.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="mp-hmw-refs">
+        <b>Iyengar and Lepper Jam Study:</b> This study shows that too many choices can overwhelm individuals, leading to lower satisfaction and reduced likelihood of making a decision.
+        <br><br>
+        <b>Decoy Effect:</b> Adding a strategically priced option can influence users to choose a more favorable or premium tier.
+      </p>
+    </div>
+
+    <div class="mp-hmw-before-after-row">
+      <div class="mp-hmw-combo">
+        <p class="mp-hmw-label">Before</p>
+        <div class="mp-hmw-pair">
+          <img src="../assets/misspoppinsapp/hmwbefore2.svg" alt="Before Packages" class="mp-hmw-phone">
+          <p class="mp-hmw-text">The app's current package page is <b>cluttered and disorganized</b>, presenting users with a wide range of session numbers and price points.<br><br>This <span class="highlight">lack of uniformity</span> leads to confusion and makes selecting a package overwhelming.</p>
+        </div>
+      </div>
+
+      <div class="mp-hmw-combo">
+        <p class="mp-hmw-label">After</p>
+        <div class="mp-hmw-pair">
+          <img src="../assets/misspoppinsapp/hmwafter2.svg" alt="After Packages" class="mp-hmw-phone">
+          <p class="mp-hmw-text">By incorporating the Decoy Effect into the session and pricing structure, and clearly labeling and describing each tier with a focus on their specific benefits, the <span class="highlight">decision-making process becomes simpler</span>, reducing decision fatigue and creating a more user-friendly experience.<br><br>Highlighting popular or recommended packages can help users feel more confident in their choice and reduce the time and effort spent evaluating all available options.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HMW Answer 3 -->
+  <div class="hmw3-section">
+    <p class="hmw3-question">
+      How might we design a navigation system that simplifies access to resources and eliminates user frustration?
+    </p>
+
+    <div class="hmw3-step">
+      <img src="../assets/misspoppinsapp/hmwsearchicon.svg" alt="Search Icon" class="hmw3-icon">
+      <div class="hmw3-step-text">
+        <span class="hmw3-bold">1. Introduce a Generative AI-powered search bar</span> that allows users to type natural language queries and receive tailored recommendations for articles, sessions, or features.
+      </div>
+    </div>
+
+    <div class="mp-hmw-before-after-row3">
+      <div class="mp-hmw-combo3">
+        <p class="mp-hmw-label3">Before</p>
+        <div class="mp-hmw-pair3">
+          <img src="../assets/misspoppinsapp/hmwbefore3.svg" alt="Before" class="mp-hmw-phone">
+          <p class="mp-hmw-text"><br><br>The app's rigid category-based organization lacks intuitive pathways, making it difficult for users to quickly find relevant content.</p>
+        </div>
+      </div>
+
+      <div class="mp-hmw-combo3">
+        <p class="mp-hmw-label">After</p>
+        <div class="mp-hmw-pair3">
+          <img src="../assets/misspoppinsapp/hmwafter3.svg" alt="After" class="mp-hmw-phone">
+          <p class="mp-hmw-text">For example, users can ask questions like "Which coaching package is best for first-time parents?" "What are some quick tips for calming a crying baby?" or "Can you help me find articles on toddler sleep training?"<br><br><br><br><br><br>The AI will provide responses based on the app's verified expert-reviewed content, ensuring accurate and reliable information.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HMW 3.2 -->
+    <div class="hmw3-subsection">
+      <div class="hmw3-step">
+        <img src="../assets/misspoppinsapp/hmwslidebar.svg" alt="Slidebar Icon" class="hmw3-icon">
+        <div class="hmw3-step-text">
+          <span class="hmw3-bold">2. Simplify the information architecture</span> by reducing unnecessary clicks and pages. Implement a <span class="hmw3-red">sliding sidebar</span> menu for quick access to key categories like resources, appointment scheduling, and session packages.
+        </div>
+      </div>
+
+      <div class="hmw3-row-slider">
+        <div class="hmw3-column">
+          <p class="hmw3-label3-2">Before</p>
+          <div class="hmw3-img-description">
+            <video class="mp-video3-2" src="../assets/misspoppinsapp/hmw3-2.mov" autoplay muted loop playsinline></video>
+            <div class="hmw3-text-list">
+              <p class="hmw3-caption">Currently, booking an appointment involves navigating through multiple steps:</p>
+              <ol class="hmw3-list">
+                <li>Selecting one of nine categories (lactation, sleep, nutrition, parenting, etc.)</li>
+                <li>Choosing whether the appointment is for themselves or their child</li>
+                <li>Viewing package options</li>
+                <li>Clicking to see package details</li>
+                <li>Navigating to the coach profile</li>
+                <li>And finally accessing the coach's package offerings</li>
+              </ol>
+              <p class="hmw3-note">This complex process makes it difficult to find and book information efficiently.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hmw3-column">
+          <p class="hmw3-label3-2">After</p>
+          <div class="hmw3-img-description">
+            <video class="mp-video3-2" src="../assets/misspoppinsapp/hmw3-2-2.mov" autoplay muted loop playsinline></video>
+            <p class="hmw3-text">By consolidating these steps into a <span class="hmw3-red">sliding sidebar</span>, users can view coach details, package information, and session options seamlessly in one place, without the need to click through multiple pages. <br><br>This approach streamlines the process, saving time and reducing frustration.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HMW Answer 4 -->
+  <div class="hmw4-section">
+    <p class="hmw4-question">
+      How might we build a community that ensures the advice shared is trustworthy and credible?
+    </p>
+
+    <div class="hmw4-top-row">
+      <div class="hmw4-step">
+        <img src="../assets/misspoppinsapp/hmw4hand.svg" alt="Mentorship Icon" class="hmw4-icon">
+        <p class="hmw4-step-text"><b>1. Develop a mentorship community</b> where parents can connect with mentors or peers who have relevant experience.</p>
+      </div>
+
+      <div class="hmw4-step">
+        <img src="../assets/misspoppinsapp/hmw4chat.svg" alt="Chat Icon" class="hmw4-icon">
+        <p class="hmw4-step-text"><b>2. Enable an open chat feature</b> that is monitored and reviewed by Generative AI for moderation, ensuring that shared advice is credible and any inappropriate or misleading information is flagged or removed promptly.</p>
+      </div>
+    </div>
+
+    <div class="hmw4-phone-row">
+      <img src="../assets/misspoppinsapp/hmw4before.svg" class="hmw4-phone" alt="Before Chat & Mentor">
+      <img src="../assets/misspoppinsapp/hmw4after.svg" class="hmw4-phone" alt="After Chat & Mentor">
+    </div>
+  </div>
+
+  <!-- UX Design Wireframes -->
+  <div class="mp-wireframes-section">
+    <h2 class="mp-title">UX Design</h2>
+    <h3 class="mp-subtitle-wireframe">Wireframes Sketch</h3>
+
+    <div class="mp-wireframes-row">
+      <img src="../assets/misspoppinsapp/wireframe1.svg" alt="Wireframe 1" class="mp-wireframe-img">
+      <img src="../assets/misspoppinsapp/wireframe2.svg" alt="Wireframe 2" class="mp-wireframe-img">
+      <img src="../assets/misspoppinsapp/wireframe3.svg" alt="Wireframe 3" class="mp-wireframe-img">
+    </div>
+  </div>
+
+  <!-- Final Wireframes -->
+  <div class="mp-wireframes-section">
+    <h3 class="mp-subtitle">Wireframes</h3>
+
+    <div class="mp-wireframes-row">
+      <img src="../assets/misspoppinsapp/hmwafter3.svg" alt="Wireframe 1" class="mp-wireframe-img">
+      <img src="../assets/misspoppinsapp/hmwafter2.svg" alt="Wireframe 2" class="mp-wireframe-img">
+      <img src="../assets/misspoppinsapp/hmwafter1.svg" alt="Wireframe 3" class="mp-wireframe-img">
+    </div>
+
+    <a href="https://www.figma.com/design/5dB9u3QPRTMTGqOQzCRLgr/Iva-Portfolio-Projects?node-id=1-910&t=UZcxefPIcX2asmg2-1" target="_blank" rel="noopener noreferrer" class="mp-wireframes-button">
+      View Full Wireframe
+    </a>
+  </div>
+
+  <script src="../src/misspoppins.js"></script>
+</body>
+</html>
