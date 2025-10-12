@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MissPoppins App Redesign</title>
+  <link rel="stylesheet" href="./MissPoppinsDashboard.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+  <!-- Header Component (you'll need to include your header here) -->
+  <div id="header">
+    <style>
+      body { margin:0; background:#fff; font-family: sans-serif; }
+      canvas { position:fixed; inset:0; z-index:1;  pointer-events: none; }
+      html, body {
+        height: 100%;
+        overflow-y: auto;
+      }
+  
+      /* Header */
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        background: transparent;
+        z-index: 10000;
+      }
+      .site-header .logo img {
+        height: 32px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+      .nav-links a {
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        color: #000;
+        letter-spacing: 1px;
+        transition: opacity 0.2s ease;
+      }
+      .nav-links a:hover {
+        opacity: 0.6;
+      }
+  
+    </style>
+    <!-- Header -->
+  <header class="site-header">
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../assets/images/logo.jpg" alt="Logo">
+      </a>
+    </div>
+    <nav class="nav-links">
+      <a href="about.html">ABOUT ME</a>
+      <a href="work.html">MY WORK</a>
+      <a href="rock.html" class="active">WHY ROCK</a>
+    </nav>
+  </header>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="mp-container">
+    <div class="mp-text-section">
+      <h1 class="mp-title">MissPoppins Dashboard Redesign: </h1>
+      <h2 class="mp-subtitle">Simplifying Navigation for Coaches</h2>
+      
+      <div class="mp-info">
+        <p class="mp-main-text mp-info-line">
+          <span style="font-weight: 500;">Overview:</span>
+          <span class="mp-main-text"> Streamlined navigation and introduced strategic pricing to enhance the coach-client experience.</span>
+        </p>
+        <p class="mp-main-text mp-info-line">
+          <span style="font-weight: 500;">Role:</span>
+          <span class="mp-main-text"> UX Researcher, UX/UI Designer</span>
+        </p>
+        <p class="mp-main-text mp-info-line">
+          <span style="font-weight: 500;">Toolkit:</span>
+          <span class="mp-main-text"> Figma, FigJam, Pencil and Paper</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="mp-image-section">
+      <img src="../assets/misspoppinsdesktop/desktop1.svg" alt="Dashboard Preview" class="mpd-hero-image">
+    </div>
+  </div>
+
+    <!-- Background Section -->
+    <div class="mpd-background-section">
+      <h2 class="mp-subtitle">Background</h2>
+      <p class="mp-main-text mpd-background-intro">
+        The current dashboard for coaches is <span class="highlight-red">cluttered</span> and <span class="highlight-red">confusing</span>, especially for first-time or less tech-savvy users.
+      </p>
+  
+      <!-- Problem 1: Terminology -->
+      <div class="mpd-problem-container">
+        <div class="mpd-problem-with-text">
+          <div class="mpd-problem-image-wrapper">
+            <img src="../assets/misspoppinsdesktop/background1.svg" alt="Dashboard showing cluttered interface" class="mpd-problem-img">
+          </div>
+          <div class="mpd-problem-description">
+            <p class="mp-description-text">
+              Terminology like "form," "content," "file," and "database" overlaps without clear definitions, leading to user frustration.
+            </p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Problem 2: Availability Setup -->
+      <div class="mpd-problem-container">
+        <div class="mpd-problem-with-text">
+          <div class="mpd-problem-text-left">
+            <p class="mp-description-text">
+              Availability setup felt wordy and crowded
+            </p>
+          </div>
+          <div class="mpd-problem-image-wrapper">
+            <img src="../assets/misspoppinsdesktop/background2.svg" alt="Availability setup interface" class="mpd-problem-img-wide">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Problem 3: File Storage -->
+      <div class="mpd-problem-container">
+        <div class="mpd-problem-with-text">
+          <div class="mpd-problem-image-wrapper">
+            <img src="../assets/misspoppinsdesktop/background3.svg" alt="File storage interface" class="mpd-problem-img">
+          </div>
+          <div class="mpd-problem-description">
+            <p class="mp-description-text">
+              <strong>File storage became disorganized and confusing as files accumulated.</strong> The file management process should be simplified so coaches don't waste time on it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Research Goal Section -->
+    <div class="mpd-research-section">
+      <h2 class="mp-subtitle">Research Goal</h2>
+      <p class="mp-goal-text">
+        The goal is to redesign the coach dashboard to be:
+      </p>
+
+      <div class="mp-research-steps">
+        <div class="mp-step">
+          <p class="step-number">1.</p>
+          <p class="step-label" style="margin-bottom: 3rem;">
+            Intuitive for first-time users
+          </p>
+          <img src="../assets/misspoppinsdesktop/icon1.svg" alt="Intuitive Design Icon">
+        </div>
+
+        <div class="mp-step">
+          <p class="step-number">2.</p>
+          <p class="step-label">Accessible for older adults with limited tech confidence</p>
+          <img src="../assets/misspoppinsdesktop/icon2.svg" alt="Accessibility Icon">
+        </div>
+
+        <div class="mp-step">
+          <p class="step-number">3.</p>
+          <p class="step-label">Clear in function, with reduced cognitive load</p>
+          <img src="../assets/misspoppinsdesktop/icon3.svg" alt="Clarity Icon">
+        </div>
+      </div>
+
+      <p class="mp-note">
+        This research aims to uncover detailed insights for making the dashboard more intuitive,
+        improving the first-time user experience, supporting older users, clarifying functionality,
+        and reducing cognitive load.
+      </p>
+    </div>
+
+    <!-- Research Pain Points Section -->
+    <section class="mp-painpoints-section">
+      <h2 class="mp-title">To achieve this, I analyzed pain points across key areas of the user journey, including:</h2>
+
+      <div class="mp-painpoints-grid">
+        <!-- 1. Organization -->
+        <div class="mp-painpoint-column">
+          <h3 class="mp-painpoint-heading">1. Organization</h3>
+
+          <div class="mp-painpoint-item">
+            <img src="../assets/misspoppinsdesktop/calendar.svg" alt="Calendar icon">
+            <p>Calendar Integration<br>and Scheduling</p>
+          </div>
+
+          <div class="mp-painpoint-item">
+            <img src="../assets/misspoppinsdesktop/fileshare.svg" alt="File Sharing icon">
+            <p>File and Resource<br>Sharing</p>
+          </div>
+        </div>
+
+        <!-- 2. Personalization -->
+        <div class="mp-painpoint-column">
+          <h3 class="mp-painpoint-heading">2. Personalization</h3>
+
+          <div class="mp-painpoint-item">
+            <img src="../assets/misspoppinsdesktop/personalization.svg" alt="Personalization icon">
+            <p>Personalization and<br>Dashboard Usability</p>
+          </div>
+
+          <div class="mp-painpoint-item">
+            <img src="../assets/misspoppinsdesktop/payment.svg" alt="Payment icon">
+            <p>Payment and Package<br>Transparency</p>
+          </div>
+        </div>
+
+        <!-- 3. Communication -->
+        <div class="mp-painpoint-column">
+          <h3 class="mp-painpoint-heading">3. Communication</h3>
+
+          <div class="mp-painpoint-item">
+            <img src="../assets/misspoppinsdesktop/communication.svg" alt="Communication icon">
+            <p>Notifications and<br>Communication</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- User Interviews Section -->
+    <section class="mp-user-interviews-section">
+      <h2 class="mp-subtitle">User Interviews</h2>
+    
+      <div class="mp-user-interview-content">
+        <!-- Left side -->
+        <div class="mp-user-interview-info">
+          <div class="mp-user-interview-circle">
+            <p>8</p>
+          </div>
+          <span>user interviews conducted</span>
+        </div>
+    
+        <!-- Right side (avatars inside circles) -->
+        <div class="mp-user-interview-grid">
+          <div class="mp-user-avatar"><img src="../assets/misspoppinsdesktop/user1.svg" alt="User 1"></div>
+          <div class="mp-user-avatar"><img src="../assets/misspoppinsdesktop/user2.svg" alt="User 2"></div>
+          <div class="mp-user-avatar"><img src="../assets/misspoppinsdesktop/user3.svg" alt="User 3"></div>
+          <div class="mp-user-avatar"><img src="../assets/misspoppinsdesktop/user4.svg" alt="User 4"></div>
+          <div class="mp-user-avatar"><img src="../assets/misspoppinsdesktop/user5.svg" alt="User 5"></div>
+          <div class="mp-user-avatar"><img src="../assets/misspoppinsdesktop/user6.svg" alt="User 6"></div>
+          <div class="mp-user-avatar"><img src="../assets/misspoppinsdesktop/user7.svg" alt="User 7"></div>
+          <div class="mp-user-avatar"><img src="../assets/misspoppinsdesktop/user8.svg" alt="User 8"></div>
+        </div>
+      </div>
+    </section>
+    
+
+
+    <!-- Affinity Diagram Section -->
+    <section class="mp-affinity-section">
+      <h2 class="mp-subtitle">Affinity Mapping</h2>
+      <p class="mp-affinity-description">
+        The affinity diagram below highlights coaches’ insights in each area:
+      </p>
+    
+      <div class="mp-carousel-wrapper">
+        <button class="mp-carousel-button" id="prevBtn">&#10094;</button>
+        <img src="../assets/misspoppinsdesktop/affinity1.svg" 
+             alt="Affinity Mapping Diagram" 
+             class="mp-affinity-image" 
+             id="affinityImage">
+        <button class="mp-carousel-button" id="nextBtn">&#10095;</button>
+      </div>
+    </section>
+    
+
+    <!-- Research Findings Section -->
+  <div class="mpd-research-findings-section">
+    <h2 class="mp-subtitle">Research Findings</h2>
+
+    <!-- Finding 1: Organization -->
+    <div class="mpd-finding-category">
+      <h3 class="mpd-category-title">1. Organization</h3>
+
+      <div class="mpd-finding-item">
+        <div class="mpd-finding-icon-wrapper">
+          <img src="../assets/misspoppinsdesktop/calendar.svg" alt="Calendar Icon" class="mpd-finding-icon-img">
+        </div>
+        <div class="mpd-finding-content">
+          <h4 class="mpd-finding-label">Calendar Integration and Scheduling</h4>
+          <p class="mpd-finding-text">
+            Coaches want Google Calendar integration with daily/weekly/monthly views and an easy way to set working hours. Current scheduling feels too complex and time-consuming.
+          </p>
+        </div>
+      </div>
+
+      <div class="mpd-finding-item">
+        <div class="mpd-finding-icon-wrapper">
+          <img src="../assets/misspoppinsdesktop/fileshare.svg" alt="Files Icon" class="mpd-finding-icon-img">
+        </div>
+        <div class="mpd-finding-content">
+          <h4 class="mpd-finding-label">File and Resource Sharing</h4>
+          <p class="mpd-finding-text">
+            File storage quickly becomes messy as content grows. Coaches need clearer folders, drag-and-drop uploads, and starter templates (e.g., intake forms) to simplify onboarding and data updates.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Finding 2: Personalization -->
+    <div class="mpd-finding-category">
+      <h3 class="mpd-category-title">2. Personalization</h3>
+
+      <div class="mpd-finding-item">
+        <div class="mpd-finding-icon-wrapper">
+          <img src="../assets/misspoppinsdesktop/personalization.svg" alt="Dashboard Icon" class="mpd-finding-icon-img">
+        </div>
+        <div class="mpd-finding-content">
+          <h4 class="mpd-finding-label">Personalization and Dashboard Usability</h4>
+          <p class="mpd-finding-text">
+            Coaches prefer a clean, minimal dashboard that shows only essentials (clients, sessions, and progress). They'd like color coding, tabs, or widgets for quick navigation without heavy setup.
+          </p>
+        </div>
+      </div>
+
+      <div class="mpd-finding-item">
+        <div class="mpd-finding-icon-wrapper">
+          <img src="../assets/misspoppinsdesktop/payment.svg" alt="Payment Icon" class="mpd-finding-icon-img">
+        </div>
+        <div class="mpd-finding-content">
+          <h4 class="mpd-finding-label">Payment and Package Transparency</h4>
+          <p class="mpd-finding-text">
+            Coaches want to instantly see who purchased which package, its status, and payment updates. Information about one-time sessions vs. ongoing packages should be clear and easy to access.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Finding 3: Communication -->
+    <div class="mpd-finding-category">
+      <h3 class="mpd-category-title">3. Communication</h3>
+
+      <div class="mpd-finding-item">
+        <div class="mpd-finding-icon-wrapper">
+          <img src="../assets/misspoppinsdesktop/communication.svg" alt="Notification Icon" class="mpd-finding-icon-img">
+        </div>
+        <div class="mpd-finding-content">
+          <h4 class="mpd-finding-label">Notifications and Communication</h4>
+          <p class="mpd-finding-text">
+            Coaches miss messages in email and want SMS or in-app alerts. They'd like an all-in-one hub for chat, video calls, screen sharing, and file sharing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- How Might We -->
+  <div class="mp-hmw-section">
+    <h3 class="mp-subtitle">Turning Key Insights into How Might We Statements</h3>
+
+    <div class="mp-hmw-header">
+      <div class="mp-hmw-column">
+        <img src="../assets/misspoppinsapp/hmwproblem.svg" alt="Problem Icon">
+        <h4 class="mp-hmw-subtitle">Problem</h4>
+      </div>
+      <div class="mp-hmw-column">
+        <img src="../assets/misspoppinsapp/hmwidea.svg" alt="Idea Icon">
+        <h4 class="mp-hmw-subtitle">How Might We</h4>
+      </div>
+    </div>
+
+    <!-- HMW Rows -->
+    <div class="mp-hmw-row">
+      <div class="mp-hmw-bubble">Coaches struggle with <span class="highlight-red"> disorganized file storage </span>  and <span class="highlight-red"> complex scheduling tools</span>, making it difficult for first-time users with limited tech experience to manage their clients efficiently.</div>
+      <img src="../assets/misspoppinsapp/yellowarrow.svg" alt="Arrow" class="mp-hmw-arrow">
+      <div class="mp-hmw-bubble">How might we create a <span class="highlight-red">clear, intuitive scheduling and file management system</span> that reduces setup effort and helps coaches find and share information quickly?</div>
+    </div>
+
+
+    <div class="mp-hmw-row">
+      <div class="mp-hmw-bubble">The platform feels <span class="highlight-red"> wordy and cluttered</span>, leaving coaches <span class="highlight-red"> overwhelmed </span>instead of supported, while they still need personalized views of clients, progress, and payment information.</div>
+      <img src="../assets/misspoppinsapp/yellowarrow.svg" alt="Arrow" class="mp-hmw-arrow">
+      <div class="mp-hmw-bubble">How might we design a <span class="highlight-red">clean, customizable dashboard</span> that highlights each coach’s most relevant information without requiring heavy configuration?</div>
+    </div>
+
+    <div class="mp-hmw-row">
+      <div class="mp-hmw-bubble">Current communication tools are <span class="highlight-red"> fragmented and rely too heavily on email</span>, which coaches often miss, leading to <span class="highlight-red"> frustration and missed updates </span>.</div>
+      <img src="../assets/misspoppinsapp/yellowarrow.svg" alt="Arrow" class="mp-hmw-arrow">
+      <div class="mp-hmw-bubble">How might we streamline communication with <span class="highlight-red">familiar, real-time notifications and chat tools</span> that make staying connected easy and accessible for all coaches?</div>
+    </div>
+
+
+
+
+
+
+
+    <section class="hmw-section">
+      <h3 class="mp-subtitle">Answering How Might We Statements (Design Process)</h3>
+      <p class="hmw-question">
+        1. How might we design a clear, intuitive scheduling and file management system that minimizes setup and
+        helps coaches quickly find and share information?
+      </p>
+    
+      <div class="hmw-feature">
+        <img src="../assets/misspoppinsdesktop/calendar.svg" alt="Calendar Icon" class="hmw-icon">
+        <span class="hmw-feature-label">1. Unified Scheduling Calendar</span>
+      </div>
+    
+      <div class="hmw-comparison">
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">Before</h3>
+          <img src="../assets/misspoppinsdesktop/before1.svg" alt="Before Screenshot" class="hmw-image">
+          <p class="hmw-description-before">
+            Scheduling required jumping between Motherboard and Google Calendar. Working hours were hidden in menus,
+            and switching between daily, weekly, and monthly views was awkward. First-time users often felt frustrated
+            just trying to confirm or adjust availability.
+          </p>
+        </div>
+    
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">After</h3>
+          <img src="../assets/misspoppinsdesktop/after1.svg" alt="After Screenshot" class="hmw-image">
+          <p class="hmw-description-after">
+            Built-in Google Calendar sync centralizes scheduling. Coaches can set hours with simple toggles and quickly
+            switch between clean daily, weekly, and monthly views. Rescheduling is seamless, giving both coaches and
+            parents clarity without extra steps.
+          </p>
+        </div>
+      </div>
+
+      <div class="hmw-feature">
+        <img src="../assets/misspoppinsdesktop/calendar.svg" alt="Calendar Icon" class="hmw-icon">
+        <span class="hmw-feature-label">2. Streamline File & Data Management</span>
+      </div>
+    
+      <div class="hmw-comparison">
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">Before</h3>
+          <img src="../assets/misspoppinsdesktop/before2.svg" alt="Before Screenshot" class="hmw-image">
+          <p class="hmw-description-before2">
+            Files were scattered across multiple screens with no clear hierarchy. Updating client data or editing intake 
+            forms required several clicks, and there were no templates meaning every onboarding started from scratch.
+          </p>
+        </div>
+    
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">After</h3>
+          <img src="../assets/misspoppinsdesktop/after2.svg" alt="After Screenshot" class="hmw-image">
+          <p class="hmw-description-after2">
+            Labeled folders, drag-and-drop uploads, and quick search keep resources organized. Pre-made intake templates speed 
+            up onboarding, and client info (like package validity) can be edited directly, saving time as libraries grow.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <section class="hmw-section">
+      <p class="hmw-question">
+        2. How might we tailor the app experience to each coach’s unique needs and habits without overwhelming first-time users 
+        who may not be familiar with customization features?
+      </p>
+    
+      <div class="hmw-feature">
+        <img src="../assets/misspoppinsdesktop/calendar.svg" alt="Calendar Icon" class="hmw-icon">
+        <span class="hmw-feature-label">1. Personalized Dashboard</span>
+      </div>
+    
+      <div class="hmw-comparison">
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">Before</h3>
+          <img src="../assets/misspoppinsdesktop/before3.svg" alt="Before Screenshot" class="hmw-image">
+          <p class="hmw-description-before">
+            Dashboards showed every feature at once, with wordy labels and cluttered layouts. Coaches had to dig through unrelated 
+            data just to find client or session info.
+          </p>
+        </div>
+    
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">After</h3>
+          <img src="../assets/misspoppinsdesktop/after3.svg" alt="After Screenshot" class="hmw-image">
+          <p class="hmw-description-after">
+            A simplified dashboard highlights key information and uses color cues for quick recognition. Coaches can customize views 
+            gradually, keeping the experience clear for beginners.
+          </p>
+        </div>
+      </div>
+
+      <div class="hmw-feature">
+        <img src="../assets/misspoppinsdesktop/calendar.svg" alt="Calendar Icon" class="hmw-icon">
+        <span class="hmw-feature-label">2. Streamline File & Data Management</span>
+      </div>
+    
+      <div class="hmw-comparison">
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">Before</h3>
+          <img src="../assets/misspoppinsdesktop/before4.svg" alt="Before Screenshot" class="hmw-image">
+          <p class="hmw-description-before2">
+            Files were scattered across multiple screens with no clear hierarchy. Updating client data or editing intake 
+            forms required several clicks, and there were no templates meaning every onboarding started from scratch.
+          </p>
+        </div>
+    
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">After</h3>
+          <img src="../assets/misspoppinsdesktop/after4.svg" alt="After Screenshot" class="hmw-image">
+          <p class="hmw-description-after2">
+            Labeled folders, drag-and-drop uploads, and quick search keep resources organized. Pre-made intake templates speed 
+            up onboarding, and client info (like package validity) can be edited directly, saving time as libraries grow.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="hmw-section">
+      <p class="hmw-question">
+        3. How might we create a clear, intuitive scheduling and file management system that reduces setup effort and helps coaches 
+        find and share information quickly?
+      </p>
+    
+      <div class="hmw-feature">
+        <img src="../assets/misspoppinsdesktop/calendar.svg" alt="Calendar Icon" class="hmw-icon">
+        <span class="hmw-feature-label">1. Personalized Dashboard</span>
+      </div>
+    
+      <div class="hmw-comparison">
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">Before</h3>
+          <img src="../assets/misspoppinsdesktop/before5.svg" alt="Before Screenshot" class="hmw-image">
+          <p class="hmw-description-before">
+            Dashboards showed every feature at once, with wordy labels and cluttered layouts. Coaches had to dig through unrelated 
+            data just to find client or session info.
+          </p>
+        </div>
+    
+        <div class="hmw-column">
+          <h3 class="hmw-subtitle">After</h3>
+          <img src="../assets/misspoppinsdesktop/after5.svg" alt="After Screenshot" class="hmw-image">
+          <p class="hmw-description-after">
+            A simplified dashboard highlights key information and uses color cues for quick recognition. Coaches can customize views 
+            gradually, keeping the experience clear for beginners.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+
+     <!-- UX Design Wireframes -->
+    <div class="mp-wireframes-section">
+      <h2 class="mp-title">UX Design</h2>
+      <h3 class="mp-subtitle-wireframe">Wireframes Sketch</h3>
+
+      <div class="mp-wireframes-row">
+        <img src="../assets/misspoppinsapp/wireframe1.svg" alt="Wireframe 1" class="mp-wireframe-img">
+        <img src="../assets/misspoppinsapp/wireframe2.svg" alt="Wireframe 2" class="mp-wireframe-img">
+        <img src="../assets/misspoppinsapp/wireframe3.svg" alt="Wireframe 3" class="mp-wireframe-img">
+      </div>
+    </div>
+
+    <!-- Final Wireframes -->
+    <div class="mp-wireframes-section">
+      <h3 class="mp-subtitle">Wireframes</h3>
+
+      <div class="mp-wireframes-row">
+        <img src="../assets/misspoppinsapp/hmwafter3.svg" alt="Wireframe 1" class="mp-wireframe-img">
+        <img src="../assets/misspoppinsapp/hmwafter2.svg" alt="Wireframe 2" class="mp-wireframe-img">
+        <img src="../assets/misspoppinsapp/hmwafter1.svg" alt="Wireframe 3" class="mp-wireframe-img">
+      </div>
+
+      <a href="https://www.figma.com/design/5dB9u3QPRTMTGqOQzCRLgr/Iva-Portfolio-Projects?node-id=1-910&t=UZcxefPIcX2asmg2-1" target="_blank" rel="noopener noreferrer" class="mp-wireframes-button">
+        View Full Wireframe
+      </a>
+    </div>
+      
+
+  <script src="../src/misspoppinsdashboard.js"></script>
+</body>
+</html>

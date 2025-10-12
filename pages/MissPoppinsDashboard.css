@@ -1,0 +1,846 @@
+/* GLOBAL FONT */
+body {
+  font-family: 'Kufam', sans-serif !important;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+/* VIDEO STYLE */
+.mp-video {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* TYPOGRAPHY SCALE */
+.mp-title {
+  font-family: 'Kufam', sans-serif !important;
+  font-size: 48px !important;
+  font-weight: 700; /* Bold */
+  color: #4f0d81;
+  width: 400%;
+
+
+}
+
+.mp-subtitle {
+  font-size: 32px !important;
+  font-weight: 300 !important;
+  margin-bottom: 3.5rem;
+  color: #000;
+}
+
+
+.mp-main-text {
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  font-family: 'Inria Sans', sans-serif;
+
+}
+
+.mp-small-text {
+  font-size: 16px;
+  font-weight: 300!important;
+}
+
+
+/* Layout container */
+.mp-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;             /* even spacing between text and image */
+  padding: 4rem 6rem;    /* moderate horizontal padding */
+  max-width: 1200px;
+  margin: 120px auto;    /* centers the section horizontally */
+  background-color: #fff;
+}
+
+/* Text section */
+.mp-text-section {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  margin-top: 0;         /* remove negative margin */
+}
+
+.mp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  margin-top: 0rem;
+}
+
+.mp-info-line {
+  font-weight: lighter;
+  max-width: 90%;
+  line-height: 1.5;
+}
+
+.mp-info-line span {
+  font-weight: normal;
+}
+
+/* Image section */
+.mp-image-section {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* align from top */
+  margin-top: 240px; /* ⬅️ pushes image downward */
+  max-width: 500px !important;
+}
+
+
+/* Image styling */
+.mpd-hero-image,
+.mp-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+}
+
+
+/* ======================================= */
+/* BACKGROUND SECTION */
+/* ======================================= */
+
+.mpd-background-section {
+  padding: 8rem 2rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.mpd-background-section .mp-title {
+  margin-bottom: 2rem;
+}
+
+.mpd-background-intro {
+  font-size: 20px;
+  margin-bottom: 6rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Inria Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.highlight-red {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* Problem container */
+.mpd-problem-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6rem;
+  margin-bottom: 8rem;
+}
+
+/* Generic wrapper for each pair */
+.mpd-problem-with-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Image styling */
+.mpd-problem-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.mpd-problem-img,
+.mpd-problem-img-wide {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* Text description */
+.mpd-problem-description,
+.mpd-problem-text-left {
+  flex: 1;
+  font-size: 18px;
+  line-height: 1.7;
+  font-family: 'Inria Sans', sans-serif;
+  color: #111;
+  text-align: left;
+  max-width: 400px;
+}
+
+.mpd-problem-text-left {
+  text-align: right;
+}
+
+.mp-description-text {
+  font-size: 18px;
+  color: #000;
+  line-height: 1.7;
+  font-weight: 300;
+  font-family: 'Inria Sans', sans-serif;
+}
+
+
+/* Research Goal Section */
+.mpd-research-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 7rem 4rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+.mpd-research-section .mp-title {
+  font-size: 36px !important;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.mp-goal-text {
+  max-width: 700px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #333;
+  margin-bottom: 5rem;
+}
+
+/* The 3 Columns */
+.mp-research-steps {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+/* Each Column */
+.mp-step {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.step-number {
+  font-size: 18px;
+  color: #7f7b82;
+  margin-bottom: 0.5rem;
+}
+
+.step-label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* Icons */
+.mp-step img {
+  width: 90px;
+  height: auto;
+  margin-top: 1rem;
+}
+
+/* Bottom Note */
+.mp-note {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  max-width: 800px;
+  font-weight: 300;
+  font-family: 'Inria Sans', sans-serif;
+}
+
+/* Section Container */
+.mp-painpoints-section {
+  text-align: center;
+  padding: 6rem 4rem;
+  background-color: #fff;
+}
+
+.mp-painpoints-section .mp-title {
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  color: #000;
+  max-width: 900px;
+  margin: 0 auto 6rem;
+  line-height: 1.6;
+}
+
+/* 3-column grid layout */
+.mp-painpoints-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6rem;
+  flex-wrap: wrap;
+}
+
+/* Each category column */
+.mp-painpoint-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  width: 280px;
+}
+
+/* Category heading */
+.mp-painpoint-heading {
+  font-size: 22px;
+  color: #8E5DBC; /* light purple */
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Each bullet item with icon */
+.mp-painpoint-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+
+.mp-painpoint-item img {
+  width: 40px;
+  height: auto;
+}
+
+.mp-painpoint-item p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.4;
+  margin: 0;
+  font-weight: 400;
+}
+
+
+
+
+
+
+.mp-user-interviews-section {
+  text-align: center;
+  padding: 8rem 2rem;
+  background-color: #fff;
+}
+
+/* Layout */
+.mp-user-interview-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8rem;
+  flex-wrap: wrap;
+}
+
+/* Circle on left */
+.mp-user-interview-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.mp-user-interview-circle {
+  width: 80px;
+  height: 80px;
+  border: 3px solid #000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mp-user-interview-circle p {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.mp-user-interview-info span {
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+}
+
+/* Grid of avatars */
+.mp-user-interview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 3rem;
+}
+
+/* Avatar container — makes circular frame */
+.mp-user-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  transition: transform 0.2s ease;
+}
+
+.mp-user-avatar:hover {
+  transform: scale(1.05);
+  border-color: #c2a4e3;
+}
+
+/* Avatar image centered */
+.mp-user-avatar img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
+
+
+
+
+/* Affinity Mapping Section */
+.mp-affinity-section {
+  text-align: center;
+  padding: 5rem 2rem;
+  background-color: #fff;
+}
+
+
+.mp-affinity-description {
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  font-size: 18px;
+  font-weight: 300;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Carousel */
+.mp-carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.mp-affinity-image {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+}
+
+/* Arrow Buttons */
+.mp-carousel-button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mp-carousel-button:hover {
+  background-color: #f3f3f3;
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
+
+/* RESEARCH FINDINGS SECTION */
+.mpd-research-findings-section {
+  padding: 7rem 2rem;
+  background-color: #fff;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: center;
+
+  
+}
+
+.mpd-research-findings-section .mp-subtitle {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.mpd-finding-category {
+  margin-bottom: 4rem;
+}
+
+.mpd-category-title {
+  font-family: 'Kufam', sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: #7c3aed;
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.mpd-finding-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding-left: 3rem;
+}
+
+.mpd-finding-icon-wrapper {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mpd-finding-icon-img {
+  width: 50px;
+  height: 50px;
+}
+
+.mpd-finding-content {
+  flex: 1;
+  max-width: 800px;
+}
+
+.mpd-finding-label {
+  font-family: 'Inria Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #9ca3af;
+  margin-bottom: 0.75rem;
+}
+
+.mpd-finding-text {
+  font-family: 'Inria Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #000;
+  line-height: 1.7;
+}
+
+
+/* How Might We */
+
+.mp-hmw-section {
+  padding: 14rem 2rem;
+  text-align: center;
+}
+
+.mp-hmw-header {
+  display: flex;
+  justify-content: center;
+  gap: 27rem;
+  margin: 4rem 0 3rem;
+}
+
+.mp-hmw-column {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+.mp-hmw-subtitle {
+  font-size: 20px !important;
+  font-weight: 300 !important;
+}
+
+
+
+.mp-hmw-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.mp-hmw-bubble {
+  max-width: 430px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.mp-hmw-arrow {
+  width: 80px;
+  height: auto;
+}
+
+.highlight-red {
+  color: #d62828;
+  font-weight: 600;
+}
+
+
+
+
+/*HMW 1*/
+/* Section Layout */
+.hmw-section {
+  text-align: center;
+  max-width: 1000px;
+  margin: 6rem auto;
+  padding: 0 2rem;
+  font-family: 'Inria Sans', sans-serif;
+}
+
+/* Title */
+.hmw-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+/* Question */
+.hmw-question {
+  font-size: 18px;
+  color: #a74c3c; /* muted red */
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+/* Icon and feature label */
+.hmw-feature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.hmw-icon {
+  width: 35px;
+  height: 35px;
+}
+
+.hmw-feature-label {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+}
+
+/* Comparison section */
+.hmw-comparison {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+  margin-bottom: 8rem;
+}
+
+.hmw-column {
+  width: 400px;
+  text-align: center;
+}
+
+.hmw-subtitle {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+/* Images */
+.hmw-image {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 1.2rem;
+}
+
+/* Description text */
+.hmw-description-before {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  max-width: 360px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.hmw-description-after {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.hmw-description-before2 {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  max-width: 360px;
+  margin: 0 auto;
+  margin-top: 90px;
+}
+.hmw-description-after2 {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+
+    /* Wireframe */
+
+
+    .mp-wireframes-section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .mp-subtitle-wireframe{
+      margin-top: 80px !important;
+      font-size: 32px !important;
+      font-weight: 300 !important;
+      color: #000000;
+    }
+    
+    .mp-wireframes-row {
+      display: flex;
+      justify-content: center;
+      gap: 7rem;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    
+    .mp-wireframe-img {
+      width: 280px;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+
+    .mp-wireframes-button {
+      font-family: 'Inria Sans', sans-serif;
+      margin-top: 4rem;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #80609E;
+      color: white;
+      font-weight: 200;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      
+    }
+    
+    .mp-wireframes-button:hover {
+      background-color: #bba2d2;
+      color: white;
+
+    }
+    
+/* Responsive design */
+@media (max-width: 900px) {
+  .mp-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    gap: 3rem;
+  }
+
+  .mp-text-section {
+    max-width: 100%;
+  }
+
+  .mp-image-section {
+    max-width: 100%;
+  }
+
+  .mpd-hero-image,
+  .mp-image {
+    max-width: 90%;
+  }
+  
+  .mp-research-steps {
+      flex-direction: column;
+      gap: 3rem;
+   }
+  
+  .mp-step {
+      width: 100%;
+  }
+
+  .mp-painpoints-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .mp-painpoint-column {
+    width: 100%;
+  }
+
+  .mp-user-interview-content {
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .mp-user-interview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .rf-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .rf-icon {
+    margin-bottom: 4px;
+  }
+
+  .hmw-comparison {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hmw-column {
+    width: 100%;
+  }
+}
