@@ -331,7 +331,7 @@ function onClick(e) {
 
     // Duplicate that card visually
     const clone = clickedCard.clone();
-    clone.geometry.scale(-1, 1, 1);
+
 
     clone.material = clickedCard.material.clone();
     clone.material.transparent = true;
@@ -341,6 +341,8 @@ function onClick(e) {
     clickedCard.getWorldQuaternion(clone.quaternion);
     clone.scale.copy(clickedCard.scale);
     scene.add(clone);
+    clone.scale.x *= -1
+
 
     // Fade out the rock
     innerSphere.traverse(obj => {
@@ -403,6 +405,7 @@ function onClick(e) {
         document.removeEventListener("click", handleOutsideClick);
         const tlOut = gsap.timeline({
           onComplete: () => {
+            
             scene.remove(clone);
             clone.geometry.dispose();
             clone.material.dispose();
