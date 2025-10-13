@@ -18,8 +18,8 @@ body {
 /* TYPOGRAPHY SCALE */
 .mp-title {
   font-family: 'Kufam', sans-serif !important;
-  font-size: 48px !important;
-  font-weight: 700; /* Bold */
+  font-size: 52px !important;
+  font-weight: 400; /* Bold */
   color: #4f0d81;
   width: 400%;
 

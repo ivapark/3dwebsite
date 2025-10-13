@@ -52,6 +52,7 @@ function init() {
   camera.position.z = 60;
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xffffff);
   document.body.appendChild(renderer.domElement);
@@ -85,12 +86,16 @@ function init() {
     card.scale.set(0.1, 0.1, 0.1);
     cards.push(card);
     group.add(card);
+
+    
   
     // Load the actual texture asynchronously
     const texture = loader.load(
-      `../assets/images/img${i+1}.jpg`,
+      `../assets/images/img${i+1}.svg`,
       (tex) => {
         // On load → swap the texture + fade in
+        
+
         card.material.map = tex;
         card.material.needsUpdate = true;
         gsap.fromTo(card.material, { opacity: 0 }, { opacity: 1, duration: 1 });
@@ -170,8 +175,27 @@ function runTimeline() {
     const startQuat = card.quaternion.clone();
   
     // compute outward direction (from center through target position)
-    const outward = t.clone().normalize().add(card.position);
-    card.lookAt(outward);
+    // --- Ensure consistent outward & upright orientation ---
+    const outward = t.clone().normalize(); // outward direction (from origin to card)
+    const up = new THREE.Vector3(0, 1, 0); // global up reference
+
+    // Calculate a stable right vector (cross product)
+    const right = new THREE.Vector3().crossVectors(up, outward).normalize();
+
+    // Recalculate a corrected up (orthogonal to outward and right)
+    const correctedUp = new THREE.Vector3().crossVectors(outward, right).normalize();
+
+    // Build rotation matrix
+    const mat = new THREE.Matrix4().makeBasis(right, correctedUp, outward);
+
+    // Extract quaternion from matrix
+    const targetQuat = new THREE.Quaternion().setFromRotationMatrix(mat);
+
+    // Apply that rotation
+    card.quaternion.copy(targetQuat);
+
+
+  
     const endQuat = card.quaternion.clone();
   
     // reset back to start rotation before animating
@@ -261,45 +285,157 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 function onClick(e) {
-  if (!clickable || !innerSphere) return;
+  if (!clickable) return;
 
   // Normalize mouse coords (-1 to +1)
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-
-  // Cast ray from camera through mouse position
   raycaster.setFromCamera(mouse, camera);
 
-  // Check intersections with the igneous rock
-  const intersects = raycaster.intersectObject(innerSphere, true);
+  // ---- CASE 1️⃣: Rock Click → Go to About Page ----
+  if (innerSphere) {
+    const rockHits = raycaster.intersectObject(innerSphere, true);
+    if (rockHits.length > 0) {
+      clickable = false;
+      const tl = gsap.timeline({
+        onComplete: () => {
+          window.location.href = "./pages/about.html";
+        }
+      });
 
-  if (intersects.length > 0) {
+      // Zoom out camera
+      tl.to(camera.position, { z: 100, duration: 1.5, ease: "power2.inOut" });
+
+      // Fade + shrink cards
+      cards.forEach(card => {
+        tl.to(card.material, { opacity: 0, duration: 1 }, "<");
+        tl.to(card.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 1 }, "<");
+      });
+
+      // Fade rock
+      innerSphere.traverse(obj => {
+        if (obj.isMesh) {
+          tl.to(obj.material, { opacity: 0, duration: 1 }, "<");
+        }
+      });
+
+      return;
+    }
+  }
+
+  // ---- CASE 2️⃣: Card Click → Pop Out ----
+  const cardHits = raycaster.intersectObjects(cards, false);
+  if (cardHits.length > 0) {
+    const clickedCard = cardHits[0].object;
     clickable = false;
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        // After fade + zoom out → load About page
-        window.location.href = "./pages/about.html";
-      }
-    });
+    // Duplicate that card visually
+    const clone = clickedCard.clone();
+    clone.geometry.scale(-1, 1, 1);
 
-    // Zoom camera back
-    tl.to(camera.position, { z: 100, duration: 1.5, ease: "power2.inOut" });
+    clone.material = clickedCard.material.clone();
+    clone.material.transparent = true;
+    clone.material.opacity = 1;
+    clickedCard.updateMatrixWorld(true);
+    clickedCard.getWorldPosition(clone.position);
+    clickedCard.getWorldQuaternion(clone.quaternion);
+    clone.scale.copy(clickedCard.scale);
+    scene.add(clone);
 
-    // Cards fade & shrink
-    cards.forEach(card => {
-      tl.to(card.material, { opacity: 0, duration: 1 }, "<"); 
-      tl.to(card.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 1 }, "<");
-    });
-
-    // Igneous rock fades
+    // Fade out the rock
     innerSphere.traverse(obj => {
       if (obj.isMesh) {
-        tl.to(obj.material, { opacity: 0, duration: 1 }, "<");
+        gsap.to(obj.material, { opacity: 0, duration: 0.5, ease: "power2.out" });
       }
     });
+
+    // Bring clone forward & face camera center
+    const cameraDir = new THREE.Vector3();
+    camera.getWorldDirection(cameraDir);
+
+    const distanceFromCamera = 15; // adjust to bring closer/further
+    const targetPos = camera.position.clone().add(cameraDir.multiplyScalar(distanceFromCamera));
+    const faceQuat = new THREE.Quaternion().copy(camera.quaternion);
+
+    const tl = gsap.timeline();
+
+    // Move clone directly to screen center in front of camera
+    tl.to(clone.position, {
+      x: targetPos.x,
+      y: targetPos.y,
+      z: targetPos.z,
+      duration: 1,
+      ease: "power2.out"
+    });
+
+    
+    // Enlarge slightly for focus
+    tl.to(clone.scale, {
+      x: clone.scale.x * 3,
+      y: clone.scale.y * 3,
+      z: clone.scale.z * 3,
+      duration: 1,
+      ease: "power2.out"
+    }, "<");
+
+    // Make it face the viewer
+    tl.to(clone.quaternion, {
+      x: faceQuat.x,
+      y: faceQuat.y,
+      z: faceQuat.z,
+      w: faceQuat.w,
+      duration: 1,
+      ease: "power2.out"
+    }, "<");
+
+    // ---- Add outside click listener ----
+    const handleOutsideClick = (event) => {
+      // Recalculate mouse for outside click detection
+      const tempMouse = new THREE.Vector2(
+        (event.clientX / window.innerWidth) * 2 - 1,
+        -(event.clientY / window.innerHeight) * 2 + 1
+      );
+      raycaster.setFromCamera(tempMouse, camera);
+      const checkCard = raycaster.intersectObject(clone, false);
+
+      // If clicked outside the popped image
+      if (checkCard.length === 0) {
+        document.removeEventListener("click", handleOutsideClick);
+        const tlOut = gsap.timeline({
+          onComplete: () => {
+            scene.remove(clone);
+            clone.geometry.dispose();
+            clone.material.dispose();
+            clickable = true;
+          }
+        });
+
+        // Fade clone out
+        tlOut.to(clone.material, {
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.inOut"
+        });
+
+        // Fade rock back in
+        innerSphere.traverse(obj => {
+          if (obj.isMesh) {
+            tlOut.to(obj.material, { opacity: 1, duration: 0.6, ease: "power2.inOut" }, "<");
+          }
+        });
+      }
+    };
+
+    // Delay adding this listener so it doesn't trigger immediately
+    setTimeout(() => {
+      document.addEventListener("click", handleOutsideClick);
+    }, 200);
+
+    return;
   }
 }
+
+
 
 // Attach event listener
 window.addEventListener("click", onClick);
