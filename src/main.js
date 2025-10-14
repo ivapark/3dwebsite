@@ -91,7 +91,7 @@ function init() {
   
     // Load the actual texture asynchronously
     const texture = loader.load(
-      `../assets/images/img${i+1}.svg`,
+      `./assets/images/img${i+1}.svg`,
       (tex) => {
         // On load → swap the texture + fade in
         
