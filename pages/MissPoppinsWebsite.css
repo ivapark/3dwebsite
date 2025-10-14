@@ -345,6 +345,151 @@ body {
 }
 
 
+.competitormission-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 4rem;
+}
+
+.competitormission-container {
+  display: flex;
+  flex-direction: column; /* <-- This stacks text on top */
+  align-items: flex-start; /* Keeps text aligned to left */
+  gap: 3rem;
+  max-width: 1200px;
+  width: 100%;
+
+}
+
+/* --- Left Text (now on top) --- */
+.competitormission-text {
+  text-align: left;
+}
+
+.competitormission-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: lighter;
+  font-size: 48px;
+  line-height: 1.1;
+  color: #4f0d81;
+  margin: 0;
+}
+
+/* Parent container handles centering */
+.competitormission-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* The image itself */
+.competitormission-image img {
+  width: 800px;
+  height: auto;
+  border-radius: 8px;
+}
+
+
+
+/* visualization image */
+.visualization-image img {
+  width: 700px;
+  height: auto;
+  border-radius: 8px;
+}
+
+
+
+/* SECTION WRAPPER  */
+.final-product-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 4rem;
+  background: #fff;
+}
+
+.final-product-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* TITLE */
+.fp-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  font-size: 48px;
+  color: #4f0d81;
+  margin: 0 0 3.5rem 0;
+}
+
+/* LABELS ROW */
+.fp-labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+
+.fp-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 56px;
+  line-height: 1;
+  color: #000;
+  margin: 0;
+}
+
+.fp-label-left {
+  text-align: center;
+}
+
+.fp-label-right {
+  text-align: center; /* matches the composition in your screenshot */
+}
+
+/* GRID: BEFORE / AFTER */
+.fp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+}
+
+/* BEFORE COLUMN */
+.fp-before {
+  display: flex;
+  justify-content: center;
+}
+
+.fp-before-img {
+  width: 420px;            /* visually similar scale */
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+/* AFTER COLUMN */
+.fp-after {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.fp-phone {
+  width: 280px;            /* tall phone look */
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;     /* soft rounded corners like mockups */
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .fp-label { font-size: 44px; }
+  .fp-before-img { width: 360px;
 
 
 /* Responsive */
@@ -388,6 +533,9 @@ body {
     max-width: 450px;
   }
 }
+
+
+
 
 /* Responsive */
 @media (max-width: 1000px) {
