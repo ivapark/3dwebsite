@@ -490,7 +490,8 @@ body {
 @media (max-width: 1024px) {
   .fp-label { font-size: 44px; }
   .fp-before-img { width: 360px;
-
+  }
+}
 
 /* Responsive */
 @media (max-width: 950px) {

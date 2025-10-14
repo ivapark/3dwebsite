@@ -1,0 +1,327 @@
+/* GLOBAL FONT */
+body {
+  font-family: 'Kufam', sans-serif !important;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.asl-video {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* TYPOGRAPHY SCALE */
+.asl-title {
+  font-family: 'Kufam', sans-serif !important;
+  font-size: 48px !important;
+  font-weight: 700;
+  color: #190d81;
+  width: 900px;
+}
+
+.asl-subtitle {
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  margin-bottom: 3.5rem;
+  color: #000;
+}
+
+.asl-main-text {
+  font-size: 20px !important;
+  font-weight: 300 !important;
+}
+
+.asl-main-text1 {
+  font-size: 20px !important;
+  font-weight: 300 !important;
+  font-family: 'Inria Sans', sans-serif !important;
+}
+
+.asl-small-text {
+  font-size: 16px;
+  font-weight: 300 !important;
+}
+
+/* LAYOUT */
+.asl-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5rem 9rem;
+  background-color: white;
+  min-height: 100vh;
+  margin-bottom: -200px;
+  margin-top: 100px;
+
+}
+
+/* TEXT SECTION */
+.asl-text-section {
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: -280px;
+}
+
+.asl-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 50px;
+  width: 700px;
+}
+
+.asl-info-line {
+  font-weight: lighter;
+  max-width: 80%;
+  font-size: 20px !important;
+}
+
+.asl-info-line span {
+  font-weight: normal;
+}
+
+/* IMAGE SECTION */
+.asl-image-section {
+  flex-shrink: 0;
+  max-width: 650px !important;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 220px !important;
+  margin-top: -70px !important;
+}
+
+.asl-main-img {
+  width: 100%;
+  max-width: 650px !important;
+  height: auto;
+  border-radius: 20px;
+  margin-right: 220px !important;
+  margin-top: -70px !important;
+}
+
+/* About the project */
+.asl-about-section {
+  padding: 6rem 9rem;
+  background-color: #fff;
+}
+
+.asl-title1 {
+  align-items: center;
+  justify-content: center;
+  font-family: 'Kufam', sans-serif !important;
+  font-size: 48px !important;
+  font-weight: 700;
+  color: #190d81;
+}
+
+.asl-about-content {
+  display: flex;
+  gap: 12rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.asl-about-img-wrapper {
+  flex-shrink: 0;
+  max-width: 400px;
+}
+
+.asl-about-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.asl-about-text {
+  max-width: 500px;
+  font-size: 24px;
+  font-weight: 300;
+  font-family: 'Inria Sans', sans-serif;
+  color: #6D6A6A !important;
+  line-height: 1.7;
+}
+
+/* About the project asl chart */
+.asl-chart-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10rem;
+  padding: 4rem 9rem;
+}
+
+.asl-chart-text {
+  max-width: 500px;
+  margin-top: 70px;
+  color: #6D6A6A !important;
+}
+
+.asl-chart-card {
+  background-color: #f0f9ff;
+  padding: 2rem 2.5rem;
+  border-radius: 24px;
+  text-align: center;
+  max-width: 500px;
+}
+
+.asl-chart-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.asl-chart-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* demo */
+.asl-demo-section {
+  padding: 5rem 9rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+.asl-demo-video {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+/* what i did */
+.asl-whatidid-section {
+  padding: 5rem 9rem;
+  background-color: #fff;
+}
+
+.asl-whatidid-content {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.asl-whatidid-img-wrapper {
+  flex-shrink: 0;
+  max-width: 400px;
+}
+
+.asl-whatidid-img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin-top: 80px;
+}
+
+.asl-whatidid-list {
+  font-size: 18px;
+  font-weight: 300;
+  font-family: 'Inria Sans', sans-serif !important;
+  line-height: 1.7;
+  color: #6D6A6A;
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  max-width: 600px;
+}
+
+/* button */
+.asl-github-button-wrapper {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 6rem;
+}
+
+.asl-github-button {
+  background-color: #7a84b9;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 400;
+  text-decoration: none;
+  font-family: 'Kufam', sans-serif;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.asl-github-button:hover {
+  background-color: #5d6699;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .asl-container {
+    flex-direction: column;
+    padding: 3rem 2rem;
+  }
+
+  .asl-text-section {
+    max-width: 100%;
+    margin-top: 0;
+  }
+
+  .asl-title {
+    width: 100%;
+    font-size: 2rem !important;
+  }
+
+  .asl-info {
+    width: 100%;
+  }
+
+  .asl-image-section {
+    margin-right: 0 !important;
+    margin-top: 2rem !important;
+    max-width: 100%;
+  }
+
+  .asl-main-img {
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .asl-about-content {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .asl-chart-section {
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .asl-whatidid-content {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .asl-title {
+    font-size: 1.75rem !important;
+  }
+
+  .asl-subtitle {
+    font-size: 1.25rem !important;
+  }
+
+  .asl-about-section,
+  .asl-chart-section,
+  .asl-demo-section,
+  .asl-whatidid-section {
+    padding: 3rem 2rem;
+  }
+}
