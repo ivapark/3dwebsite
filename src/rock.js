@@ -51,6 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let current = "igneous";
 
+    // ---------- INITIAL FADE-IN SEQUENCE ----------
+    gsap.set([rocks, title, textBlock], { opacity: 0, y: 40 }); // start slightly lower
+    const intro = gsap.timeline({ defaults: { ease: "power2.out" } });
+    intro
+      .to(rocks, { opacity: 1, y: 0, duration: 1 }) // rocks appear
+      .to(title, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")     // then title
+      .to(textBlock, { opacity: 1, y: 0, duration: 0.8 }, "-=0.3"); // then text
+
+
+
   function updateRocks(newCenter) {
     const newLeft = rockData[newCenter].left;
     const newRight = rockData[newCenter].right;
