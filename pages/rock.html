@@ -4,14 +4,19 @@
   <meta charset="UTF-8">
   <title>Why Rock</title>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 
   <style>
-    body { margin:0; overflow:hidden; background:#fff; font-family: sans-serif; }
-    canvas { position:fixed; inset:0; z-index:1; }
+    body {
+      margin: 0;
+      background: #fff;
+      font-family: 'Nanum Brush Script', cursive;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+      
+    }
 
     /* Header */
     .site-header {
@@ -24,9 +29,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      background: transparent;
-      z-index: 10000;
+      z-index: 10;
     }
+
     .site-header .logo img { height: 32px; }
     .nav-links { display: flex; gap: 40px; }
     .nav-links a {
@@ -39,42 +44,82 @@
     }
     .nav-links a:hover { opacity: 0.6; }
 
-    /* Page content */
-    #aboutHeader {
-      text-align: center;
-      padding-top: 100px;
-      position: relative;
-      z-index: 2;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    #aboutHeader h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
-      font-family: 'Nanum Brush Script', cursive;
-    }
-    #aboutHeader p {
-      font-size: 20px;
-      font-family: 'Nanum Brush Script', cursive;
+    /* Content */
+    .content {
+      padding-top: 120px;
     }
 
-    /* Hover overlays */
-    .rock-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.7);
-      padding: 20px;
-      border-radius: 8px;
-      opacity: 0;
-      pointer-events: none;
-      text-align: center;
-      font-family: 'Nanum Brush Script', cursive;
+    .title {
+      font-size: 36px;
+      margin-bottom: 10px;
     }
-    .rock-overlay h2 { margin: 0 0 10px; font-size: 28px; }
-    .rock-overlay p { font-size: 20px; line-height: 1.4; }
-    .rock-overlay.show { opacity: 1; transition: opacity 0.3s ease; }
+
+    .subtitle {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .rock-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -100px;
+      height: 300px;
+    }
+
+    .rock {
+      width: 180px;
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .rock.left {
+      left: 20%;
+      transform: scale(0.8);
+    }
+
+    .rock.center {
+      left: 50%;
+      transform: translateX(-50%) scale(1.3);
+      opacity: 1;
+      z-index: 3;
+    }
+
+    .rock.right {
+      right: 20%;
+      transform: scale(0.8);
+    }
+
+
+    .text-block {
+      max-width: 700px;
+      margin: 60px auto;
+      text-align: left;
+      line-height: 1.5;
+      font-size: 18px;
+      opacity: 1;
+      transition: opacity 0.6s ease;
+    }
+    .text-block2 {
+      max-width: 700px;
+      margin: 60px auto;
+      text-align: center;
+      line-height: 1.5;
+      font-size: 18px;
+      opacity: 1;
+      transition: opacity 0.6s ease;
+      margin-top: -10px;
+      margin-bottom: -10px;
+    }
+
+    .text-block h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
@@ -92,28 +137,28 @@
     </nav>
   </header>
 
-  <!-- Page content -->
-  <div id="aboutHeader">
-    <h1>Why Rock?</h1>
-    <p>I find rock cycle and design to be pretty much similar to each other.<br>
-       Both have an infinite cycle of breaking down and building up.</p>
+  <!-- Page Content -->
+  <div class="content">
+    <h1 class="title">Why Rock?</h1>
+    <p class="text-block2" >click on each rock to learn more!</p>
+    <p class="subtitle" id="rockTitle">Igneous Rock — The Beginning</p>
+
+    <div class="rock-container" id="rockContainer">
+      <img src="../assets/images/rock3.svg" id="leftRock" class="rock left" alt="Sedimentary Rock">
+      <img src="../assets/images/rock1.svg" id="centerRock" class="rock center" alt="Igneous Rock">
+      <img src="../assets/images/rock2.svg" id="rightRock" class="rock right" alt="Metamorphic Rock">
+    </div>
+    
+
+    <div class="text-block" id="textBlock">
+      <h3>Scientific Process:</h3>
+      <p>Igneous rocks form when molten magma cools and solidifies, emerging from deep within the Earth as something entirely new. They represent the raw beginnings of creation — powerful, unrefined, and full of potential.</p>
+
+      <h3>My Portfolio:</h3>
+      <p>The home page marks the origin of creation, the first spark where ideas begin to take shape. Like magma cooling into solid form, it captures the foundation of design itself — raw energy becoming structure. Each project orbits around the igneous rock, symbolizing creativity drawn back to its source, the birthplace of design, experimentation, and transformation.</p>
+    </div>
   </div>
 
-  <!-- Overlays -->
-  <div id="igneous-overlay" class="rock-overlay">
-    <h2>Igneous Rock</h2>
-    <p>Formed from cooling magma — raw beginnings, creation, energy.</p>
-  </div>
-  <div id="sedimentary-overlay" class="rock-overlay">
-    <h2>Sedimentary Rock</h2>
-    <p>Layered through time — patience, history, memory of the earth.</p>
-  </div>
-  <div id="metamorphic-overlay" class="rock-overlay">
-    <h2>Metamorphic Rock</h2>
-    <p>Transformed by heat and pressure — resilience, change, growth.</p>
-  </div>
-
-  <!-- JS -->
   <script type="module" src="../src/rock.js"></script>
 </body>
 </html>

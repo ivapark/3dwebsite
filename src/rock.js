@@ -1,196 +1,117 @@
-let scene, camera, renderer;
-let targetCameraX = 0, targetCameraY = 0;
-let clickable = true;
-let rocks = {};
-let rockGroup;                // holds all rocks
-let loadedCount = 0;
-const EXPECTED = 3;           // how many rocks you will load
+document.addEventListener("DOMContentLoaded", () => {
+  const title = document.getElementById("rockTitle");
+  const textBlock = document.getElementById("textBlock");
+  const leftRock = document.getElementById("leftRock");
+  const centerRock = document.getElementById("centerRock");
+  const rightRock = document.getElementById("rightRock");
 
+  const rocks = [leftRock, centerRock, rightRock];
 
-init();
-animate();
+  const rockImages = {
+    igneous: "../assets/images/rock1.svg",
+    metamorphic: "../assets/images/rock2.svg",
+    sedimentary: "../assets/images/rock3.svg"
+  };
 
-function init() {
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 500);
-  camera.position.z = 20;
-  rockGroup = new THREE.Group();
-  scene.add(rockGroup);
+  const rockData = {
+    igneous: {
+      title: "Igneous Rock — The Beginning",
+      left: "metamorphic",
+      right: "sedimentary",
+      text: `
+        <h3>Scientific Process:</h3>
+        <p>Igneous rocks form when molten magma cools and solidifies, emerging from deep within the Earth as something entirely new. They represent the raw beginnings of creation — powerful, unrefined, and full of potential.</p>
+        <h3>My Portfolio:</h3>
+        <p>The home page marks the origin of creation, the first spark where ideas begin to take shape. Like magma cooling into solid form, it captures the foundation of design itself — raw energy becoming structure. Each project orbits around the igneous rock, symbolizing creativity drawn back to its source, the birthplace of design, experimentation, and transformation.</p>
+      `
+    },
+    metamorphic: {
+      title: "Metamorphic Rock — The Transformation",
+      left: "sedimentary",
+      right: "igneous",
+      text: `
+        <h3>Scientific Process:</h3>
+        <p>When sedimentary rocks are buried deep within the Earth, they face intense heat and pressure. This doesn’t melt them; it transforms them. Their minerals realign, creating new structures and textures. Metamorphic rocks embody resilience, strength, and the beauty of change under pressure.</p>
+        <h3>My Portfolio:</h3>
+        <p>From About Me to My Work, the layers of my skills are pressed together and transformed into creation. The My Work page represents that metamorphic state — refined, complex, and resilient. Each project is shaped through the process of breaking down ideas, researching, analyzing, and developing them into a complete and well-formed product.</p>
+      `
+    },
+    sedimentary: {
+      title: "Sedimentary Rock — The Layers of Self",
+      left: "igneous",
+      right: "metamorphic",
+      text: `
+        <h3>Scientific Process:</h3>
+        <p>Over time, igneous rocks are broken down by weathering and erosion. Their particles are carried by wind and water, gradually settling into layers that compress and harden into sedimentary rock. Each layer preserves traces of what came before — a record of change, time, and environment.</p>
+        <h3>My Portfolio:</h3>
+        <p>When the igneous stage breaks apart, it transforms into the About Me page. Here, my skills and experiences fall into place, layering over time to build a foundation. Each rock, from Figma and UI/UX to research and Java, represents both my technical and creative abilities. Through these skills, I’ve grown into a more refined designer and creator. The process reflects self-development, where fragments of knowledge and experience come together to form something cohesive and complete.</p>
+      `
+    }
+  };
 
+  let current = "igneous";
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0xffffff);
-  document.body.appendChild(renderer.domElement);
+  function updateRocks(newCenter) {
+    const newLeft = rockData[newCenter].left;
+    const newRight = rockData[newCenter].right;
+    const direction = getDirection(newCenter); // detect left or right scroll
 
-  const gltfLoader = new THREE.GLTFLoader();
+    // Fade out title and text
+    gsap.to([title, textBlock], { opacity: 0, duration: 0.3 });
 
-  // Helper loader
-  function loadRock(name, path) {
-    gltfLoader.load(path, (gltf) => {
-      const rock = gltf.scene;
-  
-      // ---- normalize size ----
-      const box = new THREE.Box3().setFromObject(rock);
-      const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scaleFactor = 4 / maxDim;          // make all comparable
-      rock.scale.setScalar(scaleFactor);
+    const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-      // Add lights
-      const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
-      hemiLight.position.set(0, 20, 0);
-      scene.add(hemiLight);
+    // Slide all rocks horizontally (like scrolling)
+    const slideDistance = 300; // adjust how far they scroll
+    const offset = direction === "left" ? -slideDistance : slideDistance;
 
-      const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
-      dirLight.position.set(5, 10, 7.5);
-      scene.add(dirLight);
-  
-      // ---- recenter the rock around its own pivot ----
-      const box2 = new THREE.Box3().setFromObject(rock);
-      const center = box2.getCenter(new THREE.Vector3());
-      rock.position.sub(center);                // now rock is centered at (0,0,0)
-  
-      // start far, then animate in
-      rock.position.z = -50;
-      rock.traverse(o => { if (o.isMesh && o.material) o.material.transparent = true; });
-      rockGroup.add(rock);
-  
-      gsap.to(rock.position, { z: 0, duration: 2, ease: "power2.out" });
-  
-      rocks[name] = rock;
-      loadedCount++;
-      layoutRocks();                            // position + center the whole group
+    tl.to(rocks, { x: offset, opacity: 0.5, duration: 0.6 }, 0);
+
+    // When off-screen, swap sources
+    tl.add(() => {
+      leftRock.src = rockImages[newLeft];
+      leftRock.dataset.name = newLeft;
+      centerRock.src = rockImages[newCenter];
+      centerRock.dataset.name = newCenter;
+      rightRock.src = rockImages[newRight];
+      rightRock.dataset.name = newRight;
+
+      // Reset instantly to opposite side before sliding back in
+      gsap.set(rocks, { x: -offset });
+    });
+
+    // Slide new set back into place (scroll in)
+    tl.to(rocks, { x: 0, opacity: 1, duration: 0.6, ease: "power2.out" });
+
+    // Update text and fade in
+    tl.add(() => {
+      title.textContent = rockData[newCenter].title;
+      textBlock.innerHTML = rockData[newCenter].text;
+      gsap.to([title, textBlock], { opacity: 1, duration: 0.6 });
+      current = newCenter;
     });
   }
-  
-  
-  function layoutRocks() {
-    const spacingX = 8;   // horizontal distance between left & right
-    const spacingY = 6;   // vertical distance between rows
-  
-    const children = rockGroup.children;
-  
-    // Position them relative to (0,0)
-    if (children.length === 1) {
-      children[0].position.set(0, 0, 0);
-    } else if (children.length === 2) {
-      children[0].position.set(-spacingX / 2, 0, 0);
-      children[1].position.set( spacingX / 2, 0, 0);
-    } else if (children.length >= 3) {
-      // Two on top, one centered below
-      children[0].position.set(-spacingX / 2, spacingY / 2, 0); // left-top
-      children[1].position.set( spacingX / 2, spacingY / 2, 0); // right-top
-      children[2].position.set(0, -spacingY / 2, 0);            // bottom center
-    }
-  
-    // --- recenter the entire group ---
-    const gbox = new THREE.Box3().setFromObject(rockGroup);
-    const gcenter = gbox.getCenter(new THREE.Vector3());
-  
-    // reset first
-    rockGroup.position.set(0, 0, 0);
-  
-    // shift so bounding box center is at origin
-    rockGroup.position.x = -gcenter.x;
-    rockGroup.position.y = -gcenter.y;
-  
-    // --- apply manual offset DOWN to clear the header ---
-    rockGroup.position.y -= 1; // adjust value until rocks sit comfortably below text
-  }
-  
-  
-  
-  // Load all rocks
-  loadRock("igneous", "../assets/models/igneous_rock_basalt/scene.gltf", -6);
-  loadRock("sedimentary", "../assets/models/limestone/scene.gltf", 0);
-  loadRock("metamorphic", "../assets/models/pink_quartzite/scene.gltf", 6);
 
-  window.addEventListener("resize", onResize);
-  window.addEventListener("mousemove", onMouseMove);
-
-  // Hover overlays with raycasting
-  window.addEventListener("mousemove", onRockHover);
-
-  // Fade in header
-  gsap.to("#aboutHeader", { opacity: 1, y: 0, duration: 1.5, delay: 1 });
-
-  setupPageTransitions();
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  if (clickable) {
-    camera.position.x += (targetCameraX - camera.position.x) * 0.05;
-    camera.position.y += (targetCameraY - camera.position.y) * 0.05;
+  // Helper to know direction of scroll (for realism)
+  function getDirection(newCenter) {
+    const order = ["igneous", "metamorphic", "sedimentary"];
+    const currentIndex = order.indexOf(current);
+    const newIndex = order.indexOf(newCenter);
+    if (newIndex > currentIndex || (currentIndex === 2 && newIndex === 0)) return "right";
+    return "left";
   }
 
-  renderer.render(scene, camera);
-}
-
-function onResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-function onMouseMove(e) {
-  if (!clickable) return;
-  targetCameraX = (e.clientX / window.innerWidth - 0.5) * 2;
-  targetCameraY = -(e.clientY / window.innerHeight - 0.5) * 2;
-}
-
-// Raycasting for hover overlays
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-
-function onRockHover(event) {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
-
-  const intersects = raycaster.intersectObjects(Object.values(rocks), true);
-
-  // Hide all overlays
-  document.querySelectorAll(".rock-overlay").forEach(o => o.classList.remove("show"));
-
-  if (intersects.length > 0) {
-    const first = intersects[0].object;
-    if (rocks.igneous && first.parent === rocks.igneous) {
-      document.getElementById("igneous-overlay").classList.add("show");
-    }
-    if (rocks.sedimentary && first.parent === rocks.sedimentary) {
-      document.getElementById("sedimentary-overlay").classList.add("show");
-    }
-    if (rocks.metamorphic && first.parent === rocks.metamorphic) {
-      document.getElementById("metamorphic-overlay").classList.add("show");
-    }
-  }
-}
-
-// Page transitions
-function setupPageTransitions() {
-  const navLinks = document.querySelectorAll(".nav-links a");
-  navLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      const targetUrl = link.getAttribute("href");
-      if (targetUrl.includes("rock.html")) return;
-
-      e.preventDefault();
-      const tl = gsap.timeline({ onComplete: () => window.location.href = targetUrl });
-
-      Object.values(rocks).forEach(rock => {
-        tl.to(rock.position, { z: -50, duration: 1.5, ease: "power2.inOut" }, 0);
-        rock.traverse(obj => {
-          if (obj.isMesh && obj.material) {
-            obj.material.transparent = true;
-            tl.to(obj.material, { opacity: 0, duration: 1 }, 0.5);
-          }
-        });
-      });
-
-      tl.to("#aboutHeader", { opacity: 0, scale: 0.8, duration: 1 }, 0);
+  // Click handling
+  [leftRock, centerRock, rightRock].forEach((rock) => {
+    rock.addEventListener("click", () => {
+      const clicked = rock.dataset.name || rock.alt.toLowerCase().split(" ")[0];
+      if (clicked === current) return;
+      updateRocks(clicked);
     });
   });
-}
+
+  // Initialize dataset
+  leftRock.dataset.name = "metamorphic";
+  centerRock.dataset.name = "igneous";
+  rightRock.dataset.name = "sedimentary";
+});
