@@ -29,12 +29,18 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      z-index: 10;
+      background: transparent;
+      z-index: 10000;
     }
-
-    .site-header .logo img { height: 32px; }
-    .nav-links { display: flex; gap: 40px; }
+    .site-header .logo img {
+      height: 32px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
     .nav-links a {
+      font-family: sans-serif;
       font-size: 14px;
       font-weight: 500;
       text-decoration: none;
@@ -42,7 +48,9 @@
       letter-spacing: 1px;
       transition: opacity 0.2s ease;
     }
-    .nav-links a:hover { opacity: 0.6; }
+    .nav-links a:hover {
+      opacity: 0.6;
+    }
 
     /* Content */
     .content {
@@ -55,7 +63,7 @@
     }
 
     .subtitle {
-      font-size: 26px;
+      font-size: 36px;
       margin-bottom: 10px;
       color: #1B3863;
     }
@@ -140,9 +148,9 @@
 
   <!-- Page Content -->
   <div class="content">
-    <h1 class="title">Why Rock?</h1>
-    <p class="text-block2" >click on each rock to learn more!</p>
     <p class="subtitle" id="rockTitle">Igneous Rock — The Beginning</p>
+    <p class="text-block2" id="textBlock2">click on each rock to learn more!</p>
+
 
     <div class="rock-container" id="rockContainer">
       <img src="../assets/images/rock3.svg" id="leftRock" class="rock left" alt="Sedimentary Rock">

@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const title = document.getElementById("rockTitle");
   const textBlock = document.getElementById("textBlock");
+  const textBlock2 = document.getElementById("textBlock2"); // <— NEW
   const leftRock = document.getElementById("leftRock");
   const centerRock = document.getElementById("centerRock");
   const rightRock = document.getElementById("rightRock");
@@ -52,12 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let current = "igneous";
 
     // ---------- INITIAL FADE-IN SEQUENCE ----------
-    gsap.set([rocks, title, textBlock], { opacity: 0, y: 40 }); // start slightly lower
+    gsap.set([rocks, title, textBlock, textBlock2], { opacity: 0, y: 40 }); // start slightly lower
     const intro = gsap.timeline({ defaults: { ease: "power2.out" } });
     intro
       .to(rocks, { opacity: 1, y: 0, duration: 1 }) // rocks appear
-      .to(title, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")     // then title
+      .to([title,textBlock2], { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")     // then title
       .to(textBlock, { opacity: 1, y: 0, duration: 0.8 }, "-=0.3"); // then text
+
+
 
 
 
@@ -67,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const direction = getDirection(newCenter); // detect left or right scroll
 
     // Fade out title and text
-    gsap.to([title, textBlock], { opacity: 0, duration: 0.3 });
+    gsap.to([title, textBlock, textBlock2], { opacity: 0, duration: 0.3 });
 
     const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
@@ -97,7 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
     tl.add(() => {
       title.textContent = rockData[newCenter].title;
       textBlock.innerHTML = rockData[newCenter].text;
-      gsap.to([title, textBlock], { opacity: 1, duration: 0.6 });
+
+      gsap.to([title, textBlock, textBlock2], { opacity: 1, duration: 0.6 });
       current = newCenter;
     });
   }
