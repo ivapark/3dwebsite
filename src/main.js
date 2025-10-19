@@ -223,9 +223,9 @@ function runTimeline() {
     z: 10, 
     duration: 2, 
     ease: "power2.inOut",
-    onStart: () => {   // <--- change here
+    onStart: () => {   
       innerSphere.visible = true;
-  
+
       innerSphere.traverse(obj => {
         if (obj.isMesh) {
           gsap.to(obj.material, {
@@ -235,11 +235,22 @@ function runTimeline() {
           });
         }
       });
+
+      // --- Show "Click" text when rock appears ---
+      const clickHint = document.getElementById("clickHint");
+      gsap.to(clickHint, { opacity: 1, duration: 1.5, delay: 0.8 });
+
+      // Fade out "Click" once user clicks anywhere
+      window.addEventListener("click", () => {
+        gsap.to(clickHint, { opacity: 0, duration: 0.8 });
+      }, { once: true });
     },
+
     onComplete: () => {
       clickable = true; // only enable interaction after zoom finishes
     }
   });
+
   
 
 
