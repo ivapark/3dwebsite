@@ -1,8 +1,6 @@
-
 let scene, camera, renderer, pink_quartzite;
 let targetCameraX = 0, targetCameraY = 0;
 let clickable = true; // allow movement right away
-
 
 init();
 animate();
@@ -17,60 +15,60 @@ function init() {
   renderer.setClearColor(0xffffff);
   document.body.appendChild(renderer.domElement);
 
+  // --- Fade in the text/content IMMEDIATELY ---
+  gsap.to("#aboutHeader", { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power2.out" });
+
+  // --- Load GLTF model asynchronously ---
   const gltfLoader = new THREE.GLTFLoader();
   gltfLoader.load(
-    '../assets/models/pink_quartzite/scene.gltf',
+    "../assets/models/pink_quartzite/scene.gltf",
     (gltf) => {
       pink_quartzite = gltf.scene;
       scene.add(pink_quartzite);
-  
+
       // --- Normalize size ---
       const box = new THREE.Box3().setFromObject(pink_quartzite);
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
       const scaleFactor = 8 / maxDim;
       pink_quartzite.scale.setScalar(scaleFactor);
-  
+
       // --- Recenter ---
       const box2 = new THREE.Box3().setFromObject(pink_quartzite);
       const center = box2.getCenter(new THREE.Vector3());
       pink_quartzite.position.sub(center);
-  
-      // --- Place at final position ---
       pink_quartzite.position.z = 0;
-  
-      // --- Set initial opacity 0 for all meshes ---
-      pink_quartzite.traverse(obj => {
+
+      // --- Prepare for fade-in ---
+      pink_quartzite.traverse((obj) => {
         if (obj.isMesh) {
           obj.material.transparent = true;
           obj.material.opacity = 0;
         }
       });
-  
-      // --- Fade in stone & header together ---
-      gsap.to("#aboutHeader", { opacity: 1, y: 0, duration: 1.5, delay: 0.5 });
-      pink_quartzite.traverse(obj => {
+
+      // --- Fade in only when model is ready ---
+      pink_quartzite.traverse((obj) => {
         if (obj.isMesh) {
           gsap.to(obj.material, {
             opacity: 1,
-            duration: 1.5,
-            delay: 0.5,
-            ease: "power2.out"
+            duration: 1.2,
+            ease: "power2.out",
+            delay: 0.2,
           });
         }
       });
+    },
+    undefined,
+    (error) => {
+      console.warn("Error loading model:", error);
+      // Optional fallback if model fails
+      gsap.to("#aboutHeader", { opacity: 1, y: 0, duration: 0.5 });
     }
   );
-  
-  
-  
-  
 
-  window.addEventListener('resize', onResize);
-  window.addEventListener('mousemove', onMouseMove);
-
-
-  
+  window.addEventListener("resize", onResize);
+  window.addEventListener("mousemove", onMouseMove);
 }
 
 function animate() {
@@ -84,7 +82,6 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-
 function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -97,50 +94,36 @@ function onMouseMove(e) {
   targetCameraY = -(e.clientY / window.innerHeight - 0.5) * 2;
 }
 
-
-
-// --- Fade-out + zoom-out transition for About page ---
+// --- Page Transitions ---
 function setupPageTransitions() {
-    const navLinks = document.querySelectorAll(".nav-links a");
-  
-    navLinks.forEach(link => {
-      link.addEventListener("click", (e) => {
-        const targetUrl = link.getAttribute("href");
-  
-         // 3) Animate text/images fading & scaling
-         tl.to("#aboutHeader", { opacity: 0, scale: 0.8, duration: 1, ease: "power2.inOut" }, 0);
-         
-        // 1) Skip if staying on About page
-        if (targetUrl.includes("work.html")) return;
-  
-        e.preventDefault(); // stop instant navigation
-  
-        const tl = gsap.timeline({
-          onComplete: () => {
-            window.location.href = targetUrl;
+  const navLinks = document.querySelectorAll(".nav-links a");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const targetUrl = link.getAttribute("href");
+
+      if (targetUrl.includes("work.html")) return;
+      e.preventDefault();
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          window.location.href = targetUrl;
+        },
+      });
+
+      tl.to("#aboutHeader", { opacity: 0, scale: 0.9, duration: 1, ease: "power2.inOut" }, 0);
+
+      if (pink_quartzite) {
+        tl.to(pink_quartzite.position, { z: -50, duration: 1.5, ease: "power2.inOut" }, 0);
+        pink_quartzite.traverse((obj) => {
+          if (obj.isMesh && obj.material) {
+            obj.material.transparent = true;
+            tl.to(obj.material, { opacity: 0, duration: 1 }, 0.5);
           }
         });
-  
-        // 2) Animate limestone rock backward & fade meshes
-        if (pink_quartzite) {
-          tl.to(pink_quartzite.position, { z: -50, duration: 1.5, ease: "power2.inOut" }, 0);
-          tl.to(pink_quartzite.rotation, { y: "+=0", duration: 1.5, ease: "power2.inOut" }, 0);
-  
-          // traverse meshes to fade materials
-          pink_quartzite.traverse(obj => {
-            if (obj.isMesh && obj.material) {
-              obj.material.transparent = true;
-              tl.to(obj.material, { opacity: 0, duration: 1 }, 0.5);
-            }
-          });
-        }
-  
-       
-      });
+      }
     });
-  }
+  });
+}
 
-  
-  
-  // Call after DOM is ready
-  window.addEventListener("DOMContentLoaded", setupPageTransitions);
+window.addEventListener("DOMContentLoaded", setupPageTransitions);
