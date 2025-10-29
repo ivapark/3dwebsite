@@ -13,7 +13,7 @@
       margin: 0;
       background: #fff;
       font-family: sans-serif;
-      overflow: hidden;
+      overflow: auto;
     }
 
     /* Header */
@@ -40,7 +40,7 @@
       letter-spacing: 1px;
     }
 
-    /* Central content */
+    /* Central Content */
     .about-content {
       position: relative;
       z-index: 2;
@@ -49,55 +49,328 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      text-align: center;
+      text-align: left;
+      padding: 0 20px;
       pointer-events: none;
-    }
-    .about-content .name-images img {
-      max-width: 500px;
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .about-content p.subtitle {
-      margin-top: 10px;
-      font-size: 30px;
-      font-family: 'Nanum Brush Script', cursive;
-    }
-    .about-content .contact {
-      margin-top: 60px;
-      font-size: 30px;
-      font-family: 'Nanum Brush Script', cursive;
-    }
-    #transition {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      pointer-events: none;
-    }
-    
-    .layer {
-      flex: 1; 
-      background-size: cover;
-      background-blend-mode: multiply; /* blend color + texture */
-      opacity: 0; 
-      transform: translateY(100%);
+      
     }
 
-    /* Specific layer colors */
-    .layer1 {
-      background: #B4ABA1 url("../assets/images/rock-texture.png");
+    .intro-text {
+      max-width: 1124px;
+      text-align: left;
     }
-    .layer2 {
-      background: #353331 url("../assets/images/rock-texture.png");
+
+    .role-line {
+      font-size: 16px;
+      font-weight: 400;
+      color: #444;
+      letter-spacing: 0.3px;
+      margin-bottom: 12px;
     }
-    .layer3 {
-      background: #F5F1E1 url("../assets/images/rock-texture.png");
+
+    .hi {
+      font-size: 78px;
+      font-weight: 300;
+      margin-bottom: 12px;
+      color: #363C90;
     }
-    .layer4 {
-      background: #2D1D11 url("../assets/images/rock-texture.png");
+
+    .hi .highlight {
+      color: #363C90; /* bluish purple similar to the screenshot */
     }
+
+    .description {
+      font-size: 52px;
+      line-height: 1.4;
+      color: #111;
+      font-weight: 300;
+      margin-bottom: 40px;
+      max-width: 1004px;
+    }
+
+    .learn-more {
+      font-size: 16px;
+      color: #000;
+      text-decoration: none;
+      font-weight: 400;
+      pointer-events: auto;
+      transition: opacity 0.3s ease;
+      text-align: right;
+    }
+
+    .learn-more:hover {
+      opacity: 0.6;
+    }
+
+
+
+
+    /* Section container */
+    .about-me-canvas {
+      position: relative;
+      width: 100%;
+      min-height: 110vh;
+      overflow: clip;
+      background: #fff;
+      pointer-events: auto;
+    }
+
+    /* Smooth gradient scroll blend */
+    .about-me-canvas::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 220px;
+      width: 100%;
+      background: linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0) 100%);
+      z-index: 0;
+    }
+
+    .css-blurry-gradient {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      width: 1200px;
+      height: 2200px;
+      border-radius: 60% 60% 60% 60%;
+      filter: blur(220px);
+      background: radial-gradient(
+          circle at 50% 50%,
+          rgba(55, 20, 213, 0.8) 0%,
+          rgba(55, 20, 213, 0.8) 40%,
+          rgb(255, 255, 255) 80%,
+          rgb(255, 255, 255) 100%
+        );      
+      opacity: 1.0;
+      pointer-events: none;
+      z-index: 0;
+
+    }
+
+
+    /* Layout wrapper */
+    .av-wrap {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 90vh;
+      padding: clamp(48px, 6vw, 80px) clamp(16px, 4vw, 40px);
+
+    }
+
+
+
+    /* The image sits inside the frame */
+    .av-photo-card img {
+      width: 80%;
+      height: 80%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) brightness(0.9);
+      
+    }
+
+    /* Big soft ground shadow (for 3D feel) */
+    /* Big offset shadow */
+    .av-ground-shadow {
+      position: absolute;
+      inset: 0;
+      transform: translate(60px, 80px) rotateZ(-4deg);
+      background: radial-gradient(
+        70% 80% at 50% 50%,
+        rgba(0, 0, 0, 0.45),
+        rgba(0, 0, 0, 0) 75%
+      );
+      filter: blur(28px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Ensure lines draw above background but below labels */
+    .av-lines {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      overflow: visible;
+    }
+
+    /* Labels */
+    .av-label {
+      position: absolute;
+      z-index: 3;
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: rgb(255, 255, 255);
+      font: 300 clamp(14px, 1.2vw, 18px)/1.2 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      letter-spacing: .2px;
+      /* text-shadow: 0 1px 2px rgba(0,0,0,0.4); */
+      cursor: pointer;
+      padding: 6px 10px;
+      transform: translate(-50%, -50%);
+      transition: filter .2s ease, opacity .2s ease;
+      will-change: transform;
+    }
+
+    /* Active/hover emphasis */
+    .av-label:hover,
+    .av-label:focus-visible {
+      outline: none;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+    }
+
+    /* Copy block */
+    .av-copy {
+      position: absolute;
+      right: 0;
+      bottom: clamp(24px, 10vh, 120px);
+      width: min(420px, 42%);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .av-copy h2 {
+      font-size: clamp(22px, 2.2vw, 36px);
+      font-weight: 300;
+      margin: 0 0 12px 0;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .av-copy p {
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.6;
+      margin: 10px 0 0 0;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Place the photo toward left/top like the reference */
+    .av-photo-card {
+      position: absolute;
+      left: clamp(0px, 4vw, 80px);
+      top: clamp(40px, 12vh, 160px);
+    }
+
+
+
+    .skills-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at 30% 70%, rgba(255, 200, 220, 0.8), rgba(255, 255, 255, 1));
+      font-family: system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    .skills-content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 180px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .skills-group h3 {
+      font-weight: 400;
+      margin-bottom: 20px;
+      color: #000;
+      font-size: 20px;
+    }
+
+    .skills-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 320px;
+    }
+
+    .icon-circle {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s ease;
+      cursor: default;
+    }
+
+    .icon-circle img {
+      width: 60%;
+      height: 60%;
+      object-fit: contain;
+    }
+
+    .icon-circle span {
+      position: absolute;
+      bottom: -24px;
+      font-size: 14px;
+      color: #111;
+      font-weight: 400;
+    }
+
+    .icon-circle:hover {
+      transform: scale(1.1);
+    }
+
+    .explore-link {
+      margin-top: 60px;
+      font-size: 16px;
+      color: #000;
+      text-decoration: none;
+      font-weight: 400;
+      transition: opacity 0.3s ease;
+    }
+
+    .explore-link:hover {
+      opacity: 0.6;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 960px) {
+      .av-photo-card {
+        left: 2vw;
+        top: 10vh;
+        transform: rotate(-10deg) perspective(1000px) rotateY(-10deg) rotateX(4deg);
+      }
+      .av-copy {
+        width: 46%;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .av-wrap {
+        min-height: 120vh;
+      }
+      .av-photo-card {
+        position: relative;
+        left: 0;
+        top: 0;
+        margin: 0 auto 36px auto;
+        transform: rotate(-6deg) perspective(800px) rotateY(-6deg) rotateX(3deg);
+        width: 92%;
+      }
+      .av-copy {
+        position: relative;
+        width: 100%;
+        right: auto;
+        bottom: auto;
+        margin-top: 16px;
+        color: #1a1a1a;
+        text-shadow: none;
+      }
+      .av-gradient { filter: blur(10px); }
+      .av-label { color: #1a1a1a; text-shadow: none; }
+    }
+
 
     /* Falling skill rocks */
     .falling-skill {
@@ -134,16 +407,52 @@
 
   <!-- Central About Page Content -->
   <div class="about-content" id="aboutHeader">
-    <div class="name-images">
-      <img src="../assets/images/iva.png" alt="IVA">
-      <img src="../assets/images/park.png" alt="PARK">
-    </div>
-    <p class="subtitle">Human–Computer Interaction</p>
-    <div class="contact">
-      <p>contact me</p>
-      <p>cmpark1656@gmail.com</p>
+    <div class="intro-text">
+      <p class="role-line">
+        Product Designer | UX Research & Systems Design | Bridging Psychology + Technology
+      </p>
+      <h1 class="hi">Hi, I’m <span class="highlight">Iva</span></h1>
+      <p class="description">
+        Human-centered designer combining behavioral science and engineering precision
+        to craft data-driven, accessible digital experiences.
+      </p>
+      <a href="work.html" class="learn-more">→ Learn More</a>
     </div>
   </div>
+
+  <section class="about-me-canvas" id="about-me-canvas">
+    <div class="css-blurry-gradient"></div>
+  
+    <div class="av-wrap">
+      <!-- 3D photo card -->
+      <div class="av-photo-card">
+        <img src="../assets/images/about-photo.svg" alt="Iva portrait">
+        <!-- big soft ground shadow -->
+        <div class="av-ground-shadow" aria-hidden="true"></div>
+      </div>
+  
+      <!-- Labels + connecting SVG lines -->
+      <svg class="av-lines" preserveAspectRatio="none"></svg>
+  
+      <!-- Keyword labels (positions set via data- attrs; anchors are on image) -->
+      <button class="av-label" data-x="6"  data-y="24" data-ax="37" data-ay="39">Creative</button>
+      <button class="av-label" data-x="9"  data-y="56" data-ax="38" data-ay="46">Problem Solving</button>
+      <button class="av-label" data-x="13"  data-y="80" data-ax="42" data-ay="52">Problem Solving</button>
+      <button class="av-label" data-x="36" data-y="18" data-ax="41" data-ay="35">Problem Solving</button>
+      <button class="av-label" data-x="72" data-y="6"  data-ax="46" data-ay="38">Creative</button>
+      <button class="av-label" data-x="80" data-y="37" data-ax="50" data-ay="43">Problem Solving</button>
+      <button class="av-label" data-x="73" data-y="55" data-ax="50" data-ay="49">Problem Solving</button>
+  
+      <!-- Descriptive copy -->
+      <div class="av-copy">
+        <h2>About Me</h2>
+        <p>My work spans startups and research projects, where I combine technical expertise with a deep understanding of human behavior to craft impactful solutions.</p>
+        <p>I’m passionate about bridging technology and humanity, particularly in areas like perception and action, and I’m dedicated to developing accessible and meaningful innovations.</p>
+      </div>
+    </div>
+  </section>
+  
+
 
   <!-- Skill Rocks -->
   <div class="falling-skill">JavaScript</div>
@@ -175,12 +484,7 @@
         });
       }
     });
-  
-    function playTransition(nextUrl) {
-      const layers = document.querySelectorAll(".layer");
-      const aboutContent = document.querySelector(".about-content");
-      const header = document.querySelector(".site-header");
-      const rocks = document.querySelectorAll(".falling-skill");
+
 
   
       // Immediately hide page content behind the transition
@@ -217,18 +521,59 @@
           });
         });
       }, layers.length * 300 + 800);
-    }
+    
   </script>
   
+
+
+
+  <section class="skills-section">
+    <div class="skills-content">
+      <div class="skills-group">
+        <h3>Application</h3>
+        <div class="skills-icons">
+          <div class="icon-circle" data-skill="Figma">
+            <img src="../assets/images/figma.svg" alt="Figma">
+            <span>Figma</span>
+          </div>
+          <div class="icon-circle" data-skill="Indesign">
+            <img src="../assets/images/indesign.svg" alt="Indesign">
+            <span>Indesign</span>
+          </div>
+          <div class="icon-circle" data-skill="AdobeXD">
+            <img src="../assets/images/xd.svg" alt="Adobe XD">
+            <span>Adobe XD</span>
+          </div>
+          <div class="icon-circle" data-skill="Procreate">
+            <img src="../assets/images/procreate.svg" alt="Procreate">
+            <span>Procreate</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="skills-group">
+        <h3>Language</h3>
+        <div class="skills-icons">
+          <div class="icon-circle" data-skill="HTML">
+            <img src="../assets/images/html.svg" alt="HTML">
+            <span>HTML</span>
+          </div>
+          <div class="icon-circle" data-skill="CSS">
+            <img src="../assets/images/css.svg" alt="CSS">
+            <span>CSS</span>
+          </div>
+          <div class="icon-circle" data-skill="Python">
+            <img src="../assets/images/python.svg" alt="Python">
+            <span>Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <a href="work.html" class="explore-link">→ Explore My Work</a>
+  </section>
   
 
-   <!-- Transition Overlay Layers -->
-   <div id="transition">
-    <div class="layer layer4"></div>
-    <div class="layer layer3"></div>
-    <div class="layer layer2"></div>
-    <div class="layer layer1"></div>
-  </div>
 
   <!-- Your JS -->
   <script src="../src/about.js"></script>
