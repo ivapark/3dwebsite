@@ -473,19 +473,8 @@
 
 
 
-
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const workLink = document.querySelector("a[href='work.html']");
-      if (workLink) {
-        workLink.addEventListener("click", (e) => {
-          e.preventDefault();
-          playTransition("work.html");
-        });
-      }
-    });
-
-
+   
   
       // Immediately hide page content behind the transition
       if (aboutContent) aboutContent.style.opacity = "0";
