@@ -1,6 +1,10 @@
+
+
 // -----------------------------
 // FALLING ROCKS INTRO ANIMATION
 // -----------------------------
+
+
 window.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("aboutHeader");
   const skills = document.querySelectorAll(".falling-skill");
@@ -113,6 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const card = wrap.querySelector(".av-photo-card");
   const svg = wrap.querySelector(".av-lines");
   const labels = Array.from(wrap.querySelectorAll(".av-label"));
+
+
+  labels.forEach((label) => {
+    const cached = label.textContent.trim();
+    label.dataset.finalText = cached;  // save it
+    label.textContent = "";            // hide text until animation runs
+  });
+  
 
   // --- Create one SVG line per label ---
   const lines = labels.map(() => {
@@ -231,56 +243,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
   gsap.ticker.add(updateLines);
 
+// -----------------------------
+// Scroll-triggered reveal animation (rolling effect replays each time)
+// -----------------------------
+gsap.registerPlugin(TextPlugin);
 
-// -----------------------------
-// Scroll-triggered reveal animation (repeats every time)
-// -----------------------------
+function randomLetters(length) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
+}
+
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Animate elements fading in from bottom to top
+        // --- Animate the photo card ---
         gsap.fromTo(
           card,
           { opacity: 0, y: 60, scale: 0.95 },
           { opacity: 1, y: 0, scale: 1, duration: 1.8, ease: "power3.out" }
         );
 
-        gsap.fromTo(
-          labels,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.08,
-            duration: 1.6,
-            ease: "power2.out",
-            onUpdate: updateLines,
-          }
+        // --- Sort labels left → right ---
+        const sortedLabels = [...labels].sort(
+          (a, b) => parseFloat(a.dataset.x) - parseFloat(b.dataset.x)
         );
 
+        // --- Animate each label + line with rolling effect ---
+        sortedLabels.forEach((label, i) => {
+          const index = labels.indexOf(label);
+          const line = lines[index];
+          const finalText = label.dataset.finalText || label.textContent.trim();
+          label.dataset.finalText = finalText; // store original
+
+          // Start blank
+          label.textContent = "";
+
+          // Fade + slide in
+          gsap.fromTo(
+            [label, line],
+            { opacity: 0, x: -30 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 1.2,
+              delay: i * 0.2,
+              ease: "power2.out",
+              onStart: () => {
+                // rolling letters
+                const rollDuration = 500 + i * 100;
+                const interval = setInterval(() => {
+                  label.textContent = randomLetters(finalText.length);
+                }, 50);
+
+                setTimeout(() => {
+                  clearInterval(interval);
+                  gsap.to(label, {
+                    duration: 0.5,
+                    text: finalText,
+                    ease: "power1.out",
+                  });
+                }, rollDuration);
+              },
+              onUpdate: updateLines,
+            }
+          );
+        });
+
+        // --- Gradual fade-in for About Me text ---
         gsap.fromTo(
           ".av-copy",
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1.8, ease: "power2.out", delay: 0.1 }
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 3, ease: "power2.out", delay: 1 }
         );
       } else {
-        // Fade out when section leaves viewport
-        gsap.to([card, labels, ".av-copy"], {
+        // --- When leaving section: reset everything ---
+        labels.forEach((label) => {
+          label.textContent = ""; // clear text
+        });
+
+        gsap.to([card, labels, lines, ".av-copy"], {
           opacity: 0,
           y: 30,
           duration: 0.8,
           ease: "power2.inOut",
+          onComplete: () => {
+            // fully reset lines for next entry
+            lines.forEach((line) => line.setAttribute("opacity", "0"));
+          },
         });
       }
     });
   },
-  {
-    threshold: 0.3, // trigger when 30% visible
-  }
+  { threshold: 0.3 } // trigger when 30% visible
 );
 
 observer.observe(wrap);
+
 
 
   // --- Fade-in animation for Skills section ---
@@ -322,5 +381,46 @@ observer.observe(wrap);
 
 
 
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const aboutContent = document.querySelector(".about-content");
+    const header = document.querySelector(".site-header");
+    const rocks = document.querySelectorAll(".falling-skill");
+    const layers = document.querySelectorAll(".layer");
+    const nextUrl = "work.html"; // change if needed
+  
+    // hide content initially
+    if (aboutContent) aboutContent.style.opacity = "0";
+    if (header) header.style.opacity = "0";
+    rocks.forEach(r => (r.style.display = "none"));
+  
+    // animate layers in
+    [...layers].reverse().forEach((layer, i) => {
+      gsap.to(layer, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        delay: i * 0.2,
+        ease: "power2.inOut",
+      });
+    });
+  
+    // animate layers out → redirect
+    setTimeout(() => {
+      layers.forEach((layer, i) => {
+        gsap.to(layer, {
+          y: "-100%",
+          opacity: 0,
+          duration: 0.6,
+          delay: i * 0.2,
+          ease: "power2.inOut",
+          onComplete: () => {
+            if (i === layers.length - 1) window.location.href = nextUrl;
+          },
+        });
+      });
+    }, layers.length * 300 + 800);
+  });
+  
 
 });

@@ -5,6 +5,7 @@
   <title>About Me</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
   <link rel="stylesheet" href="../assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 
@@ -51,7 +52,7 @@
       min-height: 100vh;
       text-align: left;
       padding: 0 20px;
-      pointer-events: none;
+      pointer-events: auto;
       
     }
 
@@ -85,21 +86,27 @@
       color: #111;
       font-weight: 300;
       margin-bottom: 40px;
-      max-width: 1004px;
+      max-width: 880px;
     }
 
     .learn-more {
-      font-size: 16px;
-      color: #000;
+      display: block;
+      margin-left: auto;
+      width: fit-content;
+      font-size: 32px;
+      color: #363C90;
       text-decoration: none;
-      font-weight: 400;
-      pointer-events: auto;
+      font-weight: 300;
       transition: opacity 0.3s ease;
-      text-align: right;
+      transform: translateX(0px);
+
+      
     }
+
 
     .learn-more:hover {
       opacity: 0.6;
+      transform: translateX(10px);
     }
 
 
@@ -113,6 +120,10 @@
       overflow: clip;
       background: #fff;
       pointer-events: auto;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     /* Smooth gradient scroll blend */
@@ -203,7 +214,7 @@
       border: none;
       background: transparent;
       color: rgb(255, 255, 255);
-      font: 300 clamp(14px, 1.2vw, 18px)/1.2 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font: 300 clamp(24px, 1.2vw, 18px)/1.2 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       letter-spacing: .2px;
       /* text-shadow: 0 1px 2px rgba(0,0,0,0.4); */
       cursor: pointer;
@@ -380,8 +391,8 @@
       width: 140px;
       height: 100px;
       background: transparent url('../assets/images/rock.png') no-repeat center/contain;
-      color: rgb(0, 0, 0);
-      font-weight: bold;
+      color: rgb(43, 43, 43);
+      font-weight: 400;
       font-size: 14px;
       display: flex;
       align-items: center;
@@ -416,7 +427,7 @@
         Human-centered designer combining behavioral science and engineering precision
         to craft data-driven, accessible digital experiences.
       </p>
-      <a href="work.html" class="learn-more">→ Learn More</a>
+      <a href="#about-me-canvas" class="learn-more">→ A little more about me</a>
     </div>
   </div>
 
@@ -436,12 +447,12 @@
   
       <!-- Keyword labels (positions set via data- attrs; anchors are on image) -->
       <button class="av-label" data-x="6"  data-y="24" data-ax="37" data-ay="39">Creative</button>
-      <button class="av-label" data-x="9"  data-y="56" data-ax="38" data-ay="46">Problem Solving</button>
-      <button class="av-label" data-x="13"  data-y="80" data-ax="42" data-ay="52">Problem Solving</button>
-      <button class="av-label" data-x="36" data-y="18" data-ax="41" data-ay="35">Problem Solving</button>
-      <button class="av-label" data-x="72" data-y="6"  data-ax="46" data-ay="38">Creative</button>
-      <button class="av-label" data-x="80" data-y="37" data-ax="50" data-ay="43">Problem Solving</button>
-      <button class="av-label" data-x="73" data-y="55" data-ax="50" data-ay="49">Problem Solving</button>
+      <button class="av-label" data-x="9"  data-y="56" data-ax="38" data-ay="46">Problem Solver</button>
+      <button class="av-label" data-x="13"  data-y="80" data-ax="42" data-ay="52">Curious</button>
+      <button class="av-label" data-x="36" data-y="18" data-ax="41" data-ay="35">Empathetic</button>
+      <button class="av-label" data-x="72" data-y="6"  data-ax="46" data-ay="38">Adaptable</button>
+      <button class="av-label" data-x="80" data-y="37" data-ax="50" data-ay="43">Collaborative</button>
+      <button class="av-label" data-x="73" data-y="55" data-ax="50" data-ay="49">Analytical</button>
   
       <!-- Descriptive copy -->
       <div class="av-copy">
@@ -455,64 +466,23 @@
 
 
   <!-- Skill Rocks -->
-  <div class="falling-skill">JavaScript</div>
-  <div class="falling-skill">Python</div>
-  <div class="falling-skill">C#</div>
+  <div class="falling-skill">Wireframing</div>
+  <div class="falling-skill">Prototyping</div>
   <div class="falling-skill">Research</div>
+  <div class="falling-skill">Usability</div>
   <div class="falling-skill">UX Design</div>
-  <div class="falling-skill">React</div>
-  <div class="falling-skill">Docker</div>
-  <div class="falling-skill">Figma</div>
-  <div class="falling-skill">Figma</div>
-  <div class="falling-skill">Figma</div>
-  <div class="falling-skill">Figma</div>
-  <div class="falling-skill">Figma</div>
-  <div class="falling-skill">Figma</div>
-  <div class="falling-skill">Figma</div>
-  <div class="falling-skill">Figma</div>
+  <div class="falling-skill">Responsiveness</div>
+  <div class="falling-skill">Interaction</div>
+  <div class="falling-skill">Accessibility</div>
+  <div class="falling-skill">Ideation</div>
+  <div class="falling-skill">Storyboarding</div>
+  <div class="falling-skill">User Flows</div>
+  <div class="falling-skill">Iteration</div>
+  <div class="falling-skill">Testing</div>
+  <div class="falling-skill">Visual</div>
+  <div class="falling-skill">Brainstorming</div>
 
 
-
-  <script>
-   
-  
-      // Immediately hide page content behind the transition
-      if (aboutContent) aboutContent.style.opacity = "0";
-      if (header) header.style.opacity = "0";
-      if (rocks.length) rocks.forEach(r => r.style.display = "none");
-
-  
-      // Step 1: Animate IN (bottom → top, so reverse order)
-      [...layers].reverse().forEach((layer, i) => {
-        gsap.to(layer, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          delay: i * 0.2,
-          ease: "power2.inOut"
-        });
-      });
-  
-      // Step 2: Animate OUT (top → bottom, normal order)
-      setTimeout(() => {
-        layers.forEach((layer, i) => {
-          gsap.to(layer, {
-            y: "-100%",
-            opacity: 0,
-            duration: 0.6,
-            delay: i * 0.2,
-            ease: "power2.inOut",
-            onComplete: () => {
-              if (i === layers.length - 1) {
-                window.location.href = nextUrl;
-              }
-            }
-          });
-        });
-      }, layers.length * 300 + 800);
-    
-  </script>
-  
 
 
 
